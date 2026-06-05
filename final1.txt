@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Calla Lily · Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #d4c8b8;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  color: #2c1a10;
+  padding: 30px 20px;
+}
+
+/* ─── PAGE SHELL ─── */
+.page {
+  max-width: 800px;
+  height: 1100px;
+  margin: 28px auto;
+  background: #fdf8ef;
+  position: relative;
+  padding: 44px 52px 44px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  break-inside: avoid;
+  overflow: hidden;
+}
+.page::before { content:''; position:absolute; inset:14px; border:0.5px solid #c9a96e; pointer-events:none; }
+.page::after  { content:''; position:absolute; inset:21px; border:0.3px solid #e0c988; pointer-events:none; }
+
+/* corners */
+.corner { position:absolute; width:34px; height:34px; background-image:url('lily.png'); background-size:contain; background-repeat:no-repeat; opacity:0.25; pointer-events:none; }
+.corner-tl { top:6px; left:6px; }
+.corner-tr { top:6px; right:6px; transform:rotate(90deg); }
+.corner-bl { bottom:6px; left:6px; transform:rotate(-90deg); }
+.corner-br { bottom:6px; right:6px; transform:rotate(180deg); }
+
+/* ─── PAGE HEADER ─── */
+.page-header {
+  text-align:center;
+  padding-bottom:12px;
+  margin-bottom:24px;
+  border-bottom:0.5px solid #e0c988;
+  flex-shrink:0;
+}
+.page-header .logo-small { width:44px; margin-bottom:4px; }
+.page-header .title-small { font-family:'Cormorant Garamond',serif; font-size:8.5px; letter-spacing:4px; color:#a07840; font-style:italic; }
+
+/* ─── COVER ─── */
+.cover {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+}
+.cover-logo img { width:110px; margin-bottom:20px; }
+.cover-name { font-family:'Cinzel',serif; font-size:34px; letter-spacing:11px; color:#1e0f08; font-weight:500; }
+.cover-sub  { font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:6px; color:#a07840; margin-top:7px; }
+.cover-ornament { display:flex; align-items:center; gap:14px; margin:22px auto; }
+.cover-ornament::before,.cover-ornament::after { content:''; width:56px; height:0.4px; background:#c9a96e; }
+.cover-ornament span { color:#c9a96e; font-size:13px; }
+.cover-tagline { font-style:italic; font-size:13px; color:#7a5a38; letter-spacing:0.5px; }
+.cover-est { font-family:'Cormorant Garamond',serif; font-size:8px; letter-spacing:5px; color:#b89060; margin-top:36px; font-style:italic; }
+
+/* ─── SECTION HEADING ─── */
+.sec-head { text-align:center; flex-shrink:0; margin-bottom: 20px !important; }
+.sec-title { 
+  font-family:'Montserrat',sans-serif; 
+  font-size:11px; 
+  letter-spacing:5px; 
+  color:#8b4a24; 
+  display:inline-block; 
+  font-weight: 700 !important;
+  background: #fdf8ef;
+  padding: 0 8px;
+}
+.sec-note  { font-family:'Montserrat',sans-serif; font-size:8px; color:#8b4a24; font-weight:400; font-style:italic; margin-left:7px; }
+
+/* ─── SIGNATURE ROWS ─── */
+.sig-block { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap: 28px; }
+.menu-row  { display:flex; gap:26px; align-items:flex-start; }
+.menu-row.reverse { flex-direction:row-reverse; }
+.menu-img  { width:106px; flex-shrink:0; }
+.menu-img img { width:100%; height:auto; border:0.5px solid #c9a96e; box-shadow:0 2px 6px rgba(0,0,0,0.05); background:#fdf8ef; display:block; object-fit:contain; }
+.menu-content { flex:1; }
+
+.item-name   { font-family:'Cinzel',serif; font-size:17px; font-weight:500; color:#2c1a10; letter-spacing:1px; }
+.item-recipe { font-size:9.5px; color:#8a6a40; margin:4px 0 6px; font-family:monospace; }
+.item-recipe::before { content:'"'; } .item-recipe::after { content:'"'; }
+.item-desc   { font-size:12px; line-height:1.44; color:#3a2a1a; }
+.item-desc-vi  { display:block; margin-bottom:3px; }
+.item-desc-en  { display:block; font-style:italic; color:#7a5a38; font-size:11px; }
+.item-price    { font-family:'Cormorant Garamond',serif; font-size:16px; color:#8b4a24; margin-top:5px; }
+.item-divider  { width:42px; height:0.5px; background:#e0c988; margin-top:10px; }
+
+/* ─── TWO-COL LIST ─── */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap: 12px 26px; }
+.classic-item  { display:flex; justify-content:space-between; align-items:baseline; gap:8px; padding:6px 0; border-bottom:0.3px dotted #dfd0a0; }
+.classic-name  { font-size:13.5px; color:#2c1a10; font-family:'Cormorant Garamond',serif; flex:1; min-width:0; }
+.classic-price { font-family:'Montserrat',sans-serif; font-size:10.5px; color:#8b4a24; white-space:nowrap; font-weight:500; flex-shrink:0; }
+.price-note    { font-size:7.5px; color:#a07840; font-style:italic; margin-left:3px; font-weight:300; }
+
+/* ─── SPIRIT TABLE ─── */
+.spirit-header {
+  display:grid; grid-template-columns:1fr 62px 62px 62px;
+  padding:0 0 5px; margin-bottom:4px;
+  border-bottom:0.5px solid #c9a96e;
+}
+.spirit-header span {
+  font-family:'Montserrat',sans-serif; font-size:7.5px; letter-spacing:1.5px;
+  color:#a07840; text-align:right; text-transform:uppercase;
+  font-weight: 600;
+}
+.spirit-header span:first-child { text-align:left; }
+
+.spirit-item {
+  display:grid; grid-template-columns:1fr 62px 62px 62px;
+  align-items:center; padding:6px 0;
+  border-bottom:0.3px dotted #dfd0a0;
+}
+.spirit-item.no-bottle { grid-template-columns:1fr 62px 62px 62px; }
+.spirit-name { font-size:13px; color:#2c1a10; font-family:'Cormorant Garamond',serif; }
+.spirit-cell { font-family:'Montserrat',sans-serif; font-size:10.5px; color:#8b4a24; text-align:right; font-weight:500; }
+.spirit-cell.dim { color:#c0a878; font-size:9px; font-style:italic; font-family:'Cormorant Garamond',serif; }
+
+/* ─── SNACK ─── */
+.snack-item  { display:flex; justify-content:space-between; align-items:baseline; padding:6px 0; border-bottom:0.3px dotted #dfd0a0; }
+.snack-name  { font-size:13.5px; color:#2c1a10; font-family:'Cormorant Garamond',serif; }
+.snack-name small { display:block; font-size:9px; color:#8a6a40; font-style:italic; }
+.snack-price { font-family:'Montserrat',sans-serif; font-size:10.5px; color:#8b4a24; white-space:nowrap; font-weight:500; }
+
+/* ─── COMBO ─── */
+.combo-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px 20px; margin-top: 4px; }
+.combo-item {
+  border:0.5px solid #ddd0a0;
+  background:#fffef7;
+  padding:14px 12px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  gap:8px;
+}
+.combo-name  { font-family:'Cinzel',serif; font-size:11px; font-weight:600; color:#2c1a10; letter-spacing:0.5px; }
+.combo-name small { display:block; font-size:9px; color:#8a6a40; font-style:italic; font-family:'Cormorant Garamond',serif; font-weight:normal; margin-top:4px; line-height:1.4; }
+.combo-price { font-family:'Montserrat',sans-serif; font-size:13px; color:#8b4a24; font-weight:600; margin-top:4px; }
+
+/* ─── FOOTER ─── */
+.page-footer {
+  text-align:center; margin-top:auto;
+  padding-top:18px; border-top:0.5px solid #e0c988;
+  flex-shrink:0;
+}
+.footer-music { font-family:'Cormorant Garamond',serif; font-size:9px; letter-spacing:3px; color:#a07840; margin-bottom:5px; font-style:italic; }
+.footer-addr  { font-family:'Cormorant Garamond',serif; font-size:7.5px; letter-spacing:2px; color:#b89060; font-style:italic; }
+
+/* spacing helpers */
+.mt8  { margin-top:8px; }
+.mt12 { margin-top:12px; }
+.mt16 { margin-top:16px; }
+.mt20 { margin-top:20px; }
+.mt24 { margin-top:24px; }
+.mb8  { margin-bottom:8px; }
+.mb12 { margin-bottom:12px; }
+.mb16 { margin-bottom:16px; }
+.mb20 { margin-bottom:20px; }
+
+/* ───────────────────────────────────────────── */
+/* RESPONSIVE CHO ĐIỆN THOẠI VÀ MÀN HÌNH NHỎ     */
+/* ───────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .page {
+    height: auto !important;      
+    overflow: visible !important; 
+    padding: 30px 24px !important;
+  }
+  
+  .menu-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+  
+  .menu-row.reverse {
+    flex-direction: column !important;
+  }
+  
+  .menu-img {
+    width: 140px !important;
+  }
+  
+  .two-col {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  
+  .combo-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  .spirit-header span {
+    font-size: 6.5px !important;
+  }
+  
+  .spirit-item {
+    grid-template-columns: 1fr 50px 50px 50px !important;
+    gap: 4px !important;
+  }
+  
+  .spirit-cell {
+    font-size: 9px !important;
+  }
+  
+  .item-name {
+    font-size: 20px !important;
+    text-align: center !important;
+  }
+  
+  .item-recipe {
+    text-align: center !important;
+    font-size: 9px !important;
+  }
+  
+  .item-desc {
+    text-align: center !important;
+  }
+  
+  .item-price {
+    text-align: center !important;
+  }
+  
+  .item-divider {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .sec-title {
+    font-size: 10px !important;
+  }
+  
+  .classic-item {
+    gap: 12px !important;
+  }
+  
+  .classic-name {
+    font-size: 14px !important;
+  }
+  
+  .classic-price {
+    font-size: 11px !important;
+  }
+  
+  .cover-name {
+    font-size: 26px !important;
+    letter-spacing: 6px !important;
+    text-align: center !important;
+  }
+  
+  .cover-sub {
+    font-size: 8px !important;
+    letter-spacing: 4px !important;
+  }
+  
+  .cover-tagline {
+    font-size: 11px !important;
+    text-align: center !important;
+  }
+  
+  .snack-name {
+    font-size: 13px !important;
+  }
+  
+  .combo-name {
+    font-size: 13px !important;
+    text-align: center !important;
+  }
+  
+  .combo-price {
+    text-align: center !important;
+  }
+}
+
+/* CHO MÀN HÌNH RẤT NHỎ (dưới 480px - iPhone SE, cũ) */
+@media (max-width: 480px) {
+  .page {
+    padding: 20px 16px !important;
+  }
+  
+  .cover-name {
+    font-size: 22px !important;
+    letter-spacing: 4px !important;
+  }
+  
+  .item-desc {
+    font-size: 11px !important;
+  }
+  
+  .item-desc-en {
+    font-size: 10px !important;
+  }
+  
+  .menu-img {
+    width: 120px !important;
+  }
+  
+  .spirit-header span {
+    font-size: 5.5px !important;
+  }
+  
+  .spirit-name {
+    font-size: 11px !important;
+  }
+  
+  .spirit-cell {
+    font-size: 8px !important;
+  }
+  
+  .footer-music {
+    font-size: 7px !important;
+  }
+  
+  .footer-addr {
+    font-size: 6.5px !important;
+  }
+}
+
+/* IN GIẤY - GIỮ NGUYÊN BỐ CỤC ĐẸP */
+@media print {
+  body { background: white; padding: 0; }
+  .page { 
+    margin: 0; 
+    box-shadow: none; 
+    page-break-after: always;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ TRANG 1 · BÌA ═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+  <div class="cover">
+    <div class="cover-logo"><img src="logo.png" alt="Calla Lily"></div>
+    <div class="cover-name">CALLA LILY</div>
+    <div class="cover-sub">ACOUSTIC BAR</div>
+    <div class="cover-ornament"><span>✦</span></div>
+    <div class="cover-tagline">live &amp; wine &amp; every night</div>
+    <div class="cover-est">EST. 2026</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ TRANG 2 · SIGNATURE (3 món) ═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="corner corner-tl"></div><div class="corner corner-br"></div>
+  <div class="page-header">
+    <img src="logo.png" alt="" class="logo-small">
+    <div class="title-small">CALLA LILY</div>
+  </div>
+  <div class="sec-head"><div class="sec-title">SIGNATURE</div></div>
+  <div class="sig-block">
+    <div class="menu-row">
+      <div class="menu-img"><img src="mulledwine.png" alt="Mulled Wine"></div>
+      <div class="menu-content">
+        <div class="item-name">Mulled Wine</div>
+        <div class="item-recipe">IL Pumo Negroamaro, Cinnamon, Star anise, Clove, Vanilla, Triple sec</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Rượu vang đỏ được hâm nóng cùng các loại gia vị thơm và thảo mộc, mang đến hương vị ấm áp và dễ chịu. Lựa chọn hoàn hảo cho những đêm se lạnh giữa cao nguyên Đà Lạt.</span>
+          <span class="item-desc-en">Red wine gently heated with fragrant spices and herbs, bringing a warm and comforting flavor. The perfect choice for chilly nights in the highlands of Đà Lạt.</span>
+        </div>
+        <div class="item-price">259k</div>
+        <div class="item-divider"></div>
+      </div>
+    </div>
+    <div class="menu-row reverse">
+      <div class="menu-img"><img src="redsangria.png" alt="Red Sangria"></div>
+      <div class="menu-content">
+        <div class="item-name">Red Sangria</div>
+        <div class="item-recipe">Red wine, Gold rum, Cherry brandy, Orange, Apple, Lemon</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Vang đỏ đậm đà hòa cùng trái cây tươi và hương anh đào ngọt dịu. Một lựa chọn lý tưởng cho những cuộc trò chuyện kéo dài bên tiếng nhạc.</span>
+          <span class="item-desc-en">Rich red wine blended with fresh fruit and sweet cherry notes. An ideal choice for long conversations with live music.</span>
+        </div>
+        <div class="item-price">240k</div>
+        <div class="item-divider"></div>
+      </div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-img"><img src="whitesangria.png" alt="White Sangria"></div>
+      <div class="menu-content">
+        <div class="item-name">White Sangria</div>
+        <div class="item-recipe">White wine, Gold rum, Triple sec, Lemon, Apple</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Vang trắng kết hợp rum vàng và hương cam thanh mát, hòa quyện cùng táo cắt hạt lựu. Hương vị trái cây nhẹ nhàng, tươi mát với hậu vị sảng khoái.</span>
+          <span class="item-desc-en">White wine blended with gold rum and fresh orange zest, mixed with diced apple. A light, fresh fruit flavor with an invigorating finish.</span>
+        </div>
+        <div class="item-price">240k</div>
+        <div class="item-divider"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ TRANG 3 · SIGNATURE (4 món) ═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="corner corner-tl"></div><div class="corner corner-br"></div>
+  <div class="page-header">
+    <img src="logo.png" alt="" class="logo-small">
+    <div class="title-small">CALLA LILY</div>
+  </div>
+  <div class="sec-head"><div class="sec-title">SIGNATURE</div></div>
+  <div class="sig-block">
+    <div class="menu-row">
+      <div class="menu-img"><img src="blushoflily.png" alt="Blush of Lily"></div>
+      <div class="menu-content">
+        <div class="item-name">Blush of Lily</div>
+        <div class="item-recipe">Hendrick's Gin, Strawberry, Lemon, Egg white</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Hendrick's Gin hòa quyện cùng dâu tây và chanh tươi, được hoàn thiện bởi lớp foam mịn, mềm mại. Hương vị thanh thoát, cân bằng giữa vị chua nhẹ và ngọt dịu.</span>
+          <span class="item-desc-en">Hendrick's Gin blended with fresh strawberry and lemon, finished with a smooth, soft foam. Ethereal — balanced between light sour and gentle sweetness.</span>
+        </div>
+        <div class="item-price">260k</div><div class="item-divider"></div>
+      </div>
+    </div>
+    <div class="menu-row reverse">
+      <div class="menu-img"><img src="ifeelgood.png" alt="I Feel Good"></div>
+      <div class="menu-content">
+        <div class="item-name">I Feel Good</div>
+        <div class="item-recipe">Gin, Apricot syrup, Grapefruit syrup, Basil, Lemon</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Hương mơ chín mọng hòa quyện cùng chút thảo mộc xanh từ húng quế. Một ly cocktail mang đến cảm giác thư thái và những rung cảm tích cực.</span>
+          <span class="item-desc-en">Ripe apricot aroma blended with fresh green basil herbs. A cocktail that brings relaxation and positive vibes.</span>
+        </div>
+        <div class="item-price">260k</div><div class="item-divider"></div>
+      </div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-img"><img src="feracity.png" alt="Feracity"></div>
+      <div class="menu-content">
+        <div class="item-name">Feracity</div>
+        <div class="item-recipe">Jim Beam, Fresh pineapple, Kumquat syrup, Lemon</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Sự tương phản thú vị giữa Bourbon đậm đà và trái cây nhiệt đới tươi mát. Tạo nên cảm giác mạnh mẽ nhưng dễ tiếp cận.</span>
+          <span class="item-desc-en">An interesting contrast between rich Bourbon and fresh tropical fruit. Strong yet approachable.</span>
+        </div>
+        <div class="item-price">260k</div><div class="item-divider"></div>
+      </div>
+    </div>
+    <div class="menu-row reverse">
+      <div class="menu-img"><img src="rubylily.png" alt="Ruby Lily"></div>
+      <div class="menu-content">
+        <div class="item-name">Ruby Lily</div>
+        <div class="item-recipe">Gin, Grapefruit syrup, Grenadine, Maple syrup, Orange, Lemon</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Hương bưởi hồng tươi sáng hòa quyện cùng gin và cam tươi, cân bằng bởi vị ngọt dịu của maple syrup. Hậu vị ngọt ngào dễ thưởng thức.</span>
+          <span class="item-desc-en">Bright pink grapefruit blended with gin and fresh orange, balanced by the gentle sweetness of maple syrup.</span>
+        </div>
+        <div class="item-price">260k</div><div class="item-divider"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ TRANG 4 · MOCKTAIL + CLASSIC COCKTAIL ═══════════════════════════════════ -->
+<div class="page">
+  <div class="corner corner-tl"></div><div class="corner corner-br"></div>
+  <div class="page-header">
+    <img src="logo.png" alt="" class="logo-small">
+    <div class="title-small">CALLA LILY</div>
+  </div>
+
+  <!-- MOCKTAIL -->
+  <div class="sec-head"><div class="sec-title">MOCKTAIL</div></div>
+  <div class="sig-block" style="flex:0 0 auto; gap:22px;">
+    <div class="menu-row">
+      <div class="menu-img"><img src="1.png" alt="Golden Valley"></div>
+      <div class="menu-content">
+        <div class="item-name">Golden Valley</div>
+        <div class="item-recipe">Pineapple, Passion fruit, Ginger, Lime</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Lấy cảm hứng từ những thung lũng ngập nắng, Golden Valley mang hương xoài chín mọng, sả tươi kết hợp với nước ép dưa hấu. Tạo nên độ chua ngọt vừa phải.</span>
+          <span class="item-desc-en">Inspired by sun-drenched valleys — ripe mango, fresh lemongrass and watermelon juice, perfectly balanced.</span>
+        </div>
+        <div class="item-price">210k</div><div class="item-divider"></div>
+      </div>
+    </div>
+    <div class="menu-row reverse">
+      <div class="menu-img"><img src="2.png" alt="Berry Paradise"></div>
+      <div class="menu-content">
+        <div class="item-name">Berry Paradise</div>
+        <div class="item-recipe">Raspberry, Blueberry, Soda, Mint</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Những tầng hương quả chín mọng kết hợp cùng chút chanh tươi, mang đến cảm giác tươi mát đầy quen thuộc.</span>
+          <span class="item-desc-en">Layers of ripe berries with a touch of fresh lime, bringing a refreshing and familiar feeling.</span>
+        </div>
+        <div class="item-price">210k</div><div class="item-divider"></div>
+      </div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-img"><img src="3.png" alt="Blue Mountain"></div>
+      <div class="menu-content">
+        <div class="item-name">Blue Mountain</div>
+        <div class="item-recipe">Butterfly pea, Mint, Lime, Soda</div>
+        <div class="item-desc">
+          <span class="item-desc-vi">Sắc xanh mát lành từ việt quất và dưa leo hòa quyện cùng hương rosemary thanh thoát. Một thức uống tươi mới, gợi làn gió mát giữa những ngọn đồi xanh.</span>
+          <span class="item-desc-en">Fresh blue hue of blueberry and cucumber blends with delicate rosemary — like a cool breeze among green hills.</span>
+        </div>
+        <div class="item-price">210k</div><div class="item-divider"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLASSIC COCKTAIL -->
+  <div class="sec-head mt24"><div class="sec-title">CLASSIC COCKTAIL</div></div>
+  <div class="two-col">
+    <div>
+      <div class="classic-item"><span class="classic-name">Mojito</span><span class="classic-price">230k</span></div>
+      <div class="classic-item"><span class="classic-name">God Father</span><span class="classic-price">240k</span></div>
+      <div class="classic-item"><span class="classic-name">Long Island Iced Tea</span><span class="classic-price">240k</span></div>
+      <div class="classic-item"><span class="classic-name">Tequila Sunrise</span><span class="classic-price">240k</span></div>
+      <div class="classic-item"><span class="classic-name">Old Fashioned</span><span class="classic-price">240k</span></div>
+      <div class="classic-item"><span class="classic-name">Negroni</span><span class="classic-price">240k</span></div>
+    </div>
+    <div>
+      <div class="classic-item"><span class="classic-name">Singapore Sling</span><span class="classic-price">235k</span></div>
+      <div class="classic-item"><span class="classic-name">Dry Martini</span><span class="classic-price">235k</span></div>
+      <div class="classic-item"><span class="classic-name">Black Russian</span><span class="classic-price">235k</span></div>
+      <div class="classic-item"><span class="classic-name">White Russian</span><span class="classic-price">235k</span></div>
+      <div class="classic-item"><span class="classic-name">Margarita</span><span class="classic-price">240k</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ TRANG 5 · SHOT & BOTTLE + BEER + SOFT DRINK ═══════════════════════════ -->
+<div class="page">
+  <div class="corner corner-tl"></div><div class="corner corner-br"></div>
+  <div class="page-header">
+    <img src="logo.png" alt="" class="logo-small">
+    <div class="title-small">CALLA LILY</div>
+  </div>
+
+  <!-- SHOT & BOTTLE -->
+  <div class="sec-head"><div class="sec-title">SHOT &amp; BOTTLE</div></div>
+  <div class="spirit-header">
+    <span></span>
+    <span>1 shot</span>
+    <span>2 shots<br><span style="font-size:6px; font-weight:normal;">(for 1 pax)</span></span>
+    <span>bottle<br><span style="font-size:6px; font-weight:normal;">(for 5 pax)</span></span>
+  </div>
+  <div>
+    <div class="spirit-item"><span class="spirit-name">Captain Morgan Gold</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Rum Bacardi</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Rum Captain Morgan</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Smirnoff</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Absolut</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Beefeater</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Bombay Sapphire</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.8m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Hendrick's Gin</span><span class="spirit-cell">200k</span><span class="spirit-cell">300k</span><span class="spirit-cell">2.8m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Tequila Jose Cuervo</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.8m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Jimbeam</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.3m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Bulleit Bourbon</span><span class="spirit-cell">200k</span><span class="spirit-cell">300k</span><span class="spirit-cell">2.2m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Johnnie Walker Black</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">2.2m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Johnnie Walker Double Black</span><span class="spirit-cell">200k</span><span class="spirit-cell">300k</span><span class="spirit-cell">2.8m</span></div>
+    <div class="spirit-item no-bottle"><span class="spirit-name">Cointreau</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
+    <div class="spirit-item no-bottle"><span class="spirit-name">Amaretto</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
+    <div class="spirit-item no-bottle"><span class="spirit-name">Blue Curacao</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
+    <div class="spirit-item no-bottle"><span class="spirit-name">Campari</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
+    <div class="spirit-item no-bottle"><span class="spirit-name">Kahlua</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
+  </div>
+
+  <!-- BEER -->
+  <div class="sec-head mt24"><div class="sec-title">BEER</div></div>
+  <div class="two-col">
+    <div><div class="classic-item"><span class="classic-name">Corona</span><span class="classic-price">190k</span></div></div>
+    <div><div class="classic-item"><span class="classic-name">Budweiser</span><span class="classic-price">190k</span></div></div>
+  </div>
+
+  <!-- SOFT DRINK -->
+  <div class="sec-head mt24"><div class="sec-title">SOFT DRINK</div></div>
+  <div style="text-align:center; margin-bottom:12px;">
+    <span style="font-family:'Montserrat',sans-serif; font-size:8px; color:#a07840; font-style:italic; letter-spacing:0.5px;">✦ From 2nd round ✦</span>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="classic-item"><span class="classic-name">Aquafina</span><span class="classic-price">50k</span></div>
+      <div class="classic-item"><span class="classic-name">Coca Cola</span><span class="classic-price">50k</span></div>
+      <div class="classic-item"><span class="classic-name">7UP</span><span class="classic-price">50k</span></div>
+    </div>
+    <div>
+      <div class="classic-item"><span class="classic-name">Schweppes</span><span class="classic-price">50k</span></div>
+      <div class="classic-item">
+        <span class="classic-name">
+          Add-on mixer
+          <span style="display:block;font-size:9px;color:#8a6a40;font-style:italic;margin-top:1px;">tonic / coke / redbull / soda</span>
+        </span>
+        <span class="classic-price">30k</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ TRANG 6 · WINE + HOT DRINK + SNACK + COMBO ═══════════════════════ -->
+<div class="page">
+  <div class="corner corner-tl"></div><div class="corner corner-br"></div>
+  <div class="page-header">
+    <img src="logo.png" alt="" class="logo-small">
+    <div class="title-small">CALLA LILY</div>
+  </div>
+
+  <!-- WINE -->
+  <div class="sec-head"><div class="sec-title">WINE <span class="sec-note">(bottle for 5 pax)</span></div></div>
+  <div class="two-col">
+    <div>
+      <div class="classic-item"><span class="classic-name">IL Pumo Negroamaro</span><span class="classic-price">200k <span class="price-note">(glass)</span> / 1.4m</span></div>
+      <div class="classic-item"><span class="classic-name">Marquis de Beylot</span><span class="classic-price">1.4m</span></div>
+      <div class="classic-item"><span class="classic-name">Château La Diligente</span><span class="classic-price">1.7m</span></div>
+      <div class="classic-item"><span class="classic-name">Crocus L'Atelier</span><span class="classic-price">2.0m</span></div>
+      <div class="classic-item"><span class="classic-name">F Negroamaro</span><span class="classic-price">3.0m</span></div>
+    </div>
+    <div>
+      <div class="classic-item"><span class="classic-name">Cielo Sauvignon Blanc</span><span class="classic-price">200k <span class="price-note">(glass)</span> / 1.4m</span></div>
+      <div class="classic-item"><span class="classic-name">Deinhard Riesling</span><span class="classic-price">1.4m</span></div>
+      <div class="classic-item"><span class="classic-name">Talò Chardonnay</span><span class="classic-price">1.7m</span></div>
+      <div class="classic-item"><span class="classic-name">CF Collefrisio Cerasuolo</span><span class="classic-price">1.7m</span></div>
+      <div class="classic-item"><span class="classic-name">Tavernello Lambrusco</span><span class="classic-price">1.5m</span></div>
+      <div class="classic-item"><span class="classic-name">Tini Prosecco</span><span class="classic-price">1.5m</span></div>
+    </div>
+  </div>
+
+  <!-- HOT DRINK -->
+  <div class="sec-head mt24"><div class="sec-title">HOT DRINK</div></div>
+  <div class="two-col">
+    <div>
+      <div class="classic-item"><span class="classic-name">Hot Chocolate</span><span class="classic-price">200k</span></div>
+      <div class="classic-item"><span class="classic-name">Artichoke Tea</span><span class="classic-price">200k</span></div>
+    </div>
+    <div>
+      <div class="classic-item"><span class="classic-name">Lemon &amp; Ginger Tea</span><span class="classic-price">200k</span></div>
+    </div>
+  </div>
+
+  <!-- SNACK -->
+  <div class="sec-head mt24"><div class="sec-title">SNACK</div></div>
+  <div class="two-col">
+    <div>
+      <div class="snack-item"><div class="snack-name">Smoked Cheese String<br><small>Phô mai sợi hun khói</small></div><div class="snack-price">69k</div></div>
+      <div class="snack-item"><div class="snack-name">Onion Crispy Potato<br><small>Khoai tây sấy hành</small></div><div class="snack-price">59k</div></div>
+    </div>
+    <div>
+      <div class="snack-item"><div class="snack-name">Garlic Crispy Pork Skin<br><small>Da heo cháy tỏi</small></div><div class="snack-price">69k</div></div>
+    </div>
+  </div>
+
+  <!-- COMBO -->
+  <div class="sec-head mt24"><div class="sec-title">COMBO</div></div>
+  <div class="combo-grid">
+    <div class="combo-item">
+      <div class="combo-name">SOLO NIGHT<small>1 Cocktail + 1 Snack bất kì</small></div>
+      <div class="combo-price">299k</div>
+    </div>
+    <div class="combo-item">
+      <div class="combo-name">SIGNATURE EXPERIENCE<small>1 Signature + 1 Snack bất kì</small></div>
+      <div class="combo-price">319k</div>
+    </div>
+    <div class="combo-item">
+      <div class="combo-name">DATE NIGHT<small>2 đồ uống bất kì + Refill Snack miễn phí</small></div>
+      <div class="combo-price">599k</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <div class="footer-music">✦ LIVE ACOUSTIC · 18:30 – 00:00 ✦</div>
+    <div class="footer-addr">57 Hà Huy Tập · Phường Xuân Hương · Đà Lạt</div>
+  </div>
+</div>
+
+</body>
+</html>

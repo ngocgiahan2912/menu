@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Calla Lily · Menu</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #1a1410;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Times New Roman', 'Cormorant Garamond', serif;
+    padding: 40px 20px;
+  }
+
+  /* Menu nền đen mờ - sang trọng, tối giản */
+  .menu {
+    max-width: 1050px;
+    width: 100%;
+    background: #0a0605;
+    position: relative;
+    padding: 55px 45px 60px 45px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border: 0.5px solid rgba(200, 180, 120, 0.3);
+  }
+
+  /* Hoa Lily làm watermark (nền mờ xuyên suốt) */
+  .menu-watermark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('lily.png');
+    background-repeat: repeat;
+    background-size: 60px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Viền kép sang trọng */
+  .menu::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border: 0.5px solid #b06948;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .menu::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    border: 0.5px solid #c48a62;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Hoa Lily 4 góc lớn hơn, tinh tế */
+  .lily-corner {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background-image: url('lily.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .corner-tl { top: 10px; left: 10px; transform: rotate(0deg); }
+  .corner-tr { top: 10px; right: 10px; transform: rotate(90deg); }
+  .corner-bl { bottom: 10px; left: 10px; transform: rotate(-90deg); }
+  .corner-br { bottom: 10px; right: 10px; transform: rotate(180deg); }
+
+  .ornament-top {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 8px;
+    color: #c4a86a;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo-section {
+    text-align: center;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+  }
+  .logo-section img {
+    max-width: 120px;
+    width: auto;
+    height: auto;
+    filter: brightness(1.1);
+  }
+
+  .est-title {
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #c4a86a;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .double-rule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 5px 0 25px;
+    position: relative;
+    z-index: 2;
+  }
+  .double-rule hr {
+    width: 100px;
+    height: 0.5px;
+    background: #c4a86a;
+    border: none;
+  }
+  .double-rule hr:first-child {
+    width: 140px;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 55px;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 750px) {
+    .menu-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .menu {
+      padding: 35px 25px;
+    }
+  }
+
+  .menu-section {
+    margin-bottom: 28px;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #d4a86a;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .section-title span {
+    font-size: 10px;
+    color: #b06948;
+    margin: 0 6px;
+  }
+
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 9px;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+  .item-name {
+    color: #e6d5b8;
+  }
+  .item-name-signature {
+    color: #d4a86a;
+    font-weight: 500;
+  }
+  .dots {
+    flex: 1;
+    border-bottom: 0.5px dotted rgba(200, 180, 120, 0.3);
+    margin: 0 12px;
+    height: 12px;
+  }
+  .item-price {
+    color: #d4a86a;
+    white-space: nowrap;
+    font-size: 12.5px;
+  }
+  .two-price {
+    display: flex;
+    gap: 12px;
+    white-space: nowrap;
+  }
+  .price-shot {
+    color: #c4a86a;
+  }
+  .price-bottle {
+    color: #d4a86a;
+  }
+
+  .live-music {
+    text-align: center;
+    margin: 20px 0 8px;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: #c4a86a;
+    font-family: 'Cinzel', serif;
+    position: relative;
+    z-index: 2;
+  }
+
+  .calligraphy-signature {
+    text-align: center;
+    margin: 30px 0 15px;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 22px;
+    color: #c4a86a;
+    letter-spacing: 1.5px;
+    border-top: 0.5px solid rgba(200, 180, 120, 0.3);
+    padding-top: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: #a07a5a;
+    font-family: 'Cinzel', serif;
+    position: relative;
+    z-index: 2;
+  }
+  .page-number {
+    text-align: center;
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: #b06948;
+    margin-top: 12px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media print {
+    body {
+      background: white;
+      padding: 0;
+    }
+    .menu {
+      box-shadow: none;
+      max-width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="menu">
+  <!-- Watermark hoa Lily nền -->
+  <div class="menu-watermark"></div>
+
+  <!-- Hoa Lily 4 góc -->
+  <div class="lily-corner corner-tl"></div>
+  <div class="lily-corner corner-tr"></div>
+  <div class="lily-corner corner-bl"></div>
+  <div class="lily-corner corner-br"></div>
+
+  <div class="ornament-top">✦ ✤ ✦</div>
+
+  <div class="logo-section">
+    <img src="logo.png" alt="Calla Lily">
+  </div>
+  <div class="est-title">EST. 2026</div>
+
+  <div class="double-rule"><hr><hr></div>
+
+  <div class="menu-grid">
+    <!-- Cột trái -->
+    <div>
+      <div class="menu-section">
+        <div class="section-title"><span>✧</span> SOFT DRINK & BEER <span>✧</span></div>
+        <div class="menu-item"><span class="item-name">Aquafina</span><span class="dots"></span><span class="item-price">50k</span></div>
+        <div class="menu-item"><span class="item-name">Coca Cola / 7UP / Schweppes</span><span class="dots"></span><span class="item-price">50k</span></div>
+        <div class="menu-item"><span class="item-name">Corona / Budweiser</span><span class="dots"></span><span class="item-price">190k</span></div>
+      </div>
+
+      <div class="menu-section">
+        <div class="section-title"><span>✧</span> MOCKTAIL <span>✧</span></div>
+        <div class="menu-item"><span class="item-name">Golden Valley</span><span class="dots"></span><span class="item-price">210k</span></div>
+        <div class="menu-item"><span class="item-name">Berry Paradise</span><span class="dots"></span><span class="item-price">210k</span></div>
+        <div class="menu-item"><span class="item-name">Blue Mountain</span><span class="dots"></span><span class="item-price">210k</span></div>
+      </div>
+
+      <div class="menu-section">
+        <div class="section-title"><span>✧</span> COCKTAIL <span>✧</span></div>
+        <div class="menu-item"><span class="item-name">Mojito</span><span class="dots"></span><span class="item-price">230k</span></div>
+        <div class="menu-item"><span class="item-name">God Father</span><span class="dots"></span><span class="item-price">240k</span></div>
+        <div class="menu-item"><span class="item-name">Long Island Iced Tea</span><span class="dots"></span><span class="item-price">240k</span></div>
+        <div class="menu-item"><span class="item-name">Tequila Sunrise</span><span class="dots"></span><span class="item-price">240k</span></div>
+        <div class="menu-item"><span class="item-name">Old Fashioned / Negroni</span><span class="dots"></span><span class="item-price">240k</span></div>
+        <div class="menu-item"><span class="item-name">Singapore Sling / Dry Martini</span><span class="dots"></span><span class="item-price">235k</span></div>
+        <div class="menu-item"><span class="item-name">Black / White Russian</span><span class="dots"></span><span class="item-price">235k</span></div>
+      </div>
+    </div>
+
+    <!-- Cột phải -->
+    <div>
+      <div class="menu-section">
+        <div class="section-title"><span>✧</span> SIGNATURE <span>✧</span></div>
+        <div class="menu-item"><span class="item-name item-name-signature">Blush of Lily</span><span class="dots"></span><span class="item-price">260k</span></div>
+        <div class="menu-item"><span class="item-name item-name-signature">I Feel Good</span><span class="dots"></span><span class="item-price">260k</span></div>
+        <div class="menu-item"><span class="item-name item-name-signature">Feracity</span><span class="dots"></span><span class="item-price">260k</span></div>
+        <div class="menu-item"><span class="item-name item-name-signature">Ruby Lily</span><span class="dots"></span><span class="item-price">260k</span></div>
+        <div class="menu-item"><span class="item-name">Sangria (Red / White)</span><span class="dots"></span><span class="item-price">240k</span></div>
+        <div class="menu-item"><span class="item-name">Mulled Wine</span><span class="dots"></span><span class="item-price">259k</span></div>
+      </div>
+
+      <div class="menu-section">
+        <div class="section-title"><span>✧</span> SHOT & BOTTLE <span>✧</span></div>
+        <div class="menu-item"><span class="item-name">Captain Morgan Gold</span><span class="dots"></span><div class="two-price"><span class="price-shot">180k</span><span class="price-bottle">1.6m</span></div></div>
+        <div class="menu-item"><span class="item-name">Hendrick's Gin</span><span class="dots"></span><div class="two-price"><span class="price-shot">200k</span><span class="price-bottle">2.8m</span></div></div>
+        <div class="menu-item"><span class="item-name">Bombay Sapphire</span><span class="dots"></span><div class="two-price"><span class="price-shot">180k</span><span class="price-bottle">1.8m</span></div></div>
+        <div class="menu-item"><span class="item-name">Beefeater / Smirnoff</span><span class="dots"></span><div class="two-price"><span class="price-shot">180k</span><span class="price-bottle">1.6m</span></div></div>
+        <div class="menu-item"><span class="item-name">Tequila Jose Cuervo</span><span class="dots"></span><div class="two-price"><span class="price-shot">180k</span><span class="price-bottle">1.8m</span></div></div>
+        <div class="menu-item"><span class="item-name">Johnnie Walker Black</span><span class="dots"></span><div class="two-price"><span class="price-shot">200k</span><span class="price-bottle">2.2m</span></div></div>
+        <div class="menu-item"><span class="item-name">Jimbeam / Bulleit</span><span class="dots"></span><div class="two-price"><span class="price-shot">180-200k</span><span class="price-bottle">1.3m / 2.2m</span></div></div>
+        <div class="menu-item"><span class="item-name">Cointreau / Amaretto / Kahlua</span><span class="dots"></span><span class="item-price">180k</span></div>
+      </div>
+
+      <div class="menu-section">
+        <div class="section-title"><span>✧</span> WINE <span>✧</span></div>
+        <div class="menu-item"><span class="item-name">IL Pumo Negroamaro - glass</span><span class="dots"></span><span class="item-price">200k</span></div>
+        <div class="menu-item"><span class="item-name">Cielo Sauvignon Blanc - glass</span><span class="dots"></span><span class="item-price">200k</span></div>
+        <div class="menu-item"><span class="item-name">Marquis / Château La Diligente</span><span class="dots"></span><span class="item-price">1.4m / 1.7m</span></div>
+        <div class="menu-item"><span class="item-name">Crocus L'Atelier / F Negroamaro</span><span class="dots"></span><span class="item-price">2.0m / 3.0m</span></div>
+      </div>
+
+      <div class="menu-section">
+        <div class="section-title"><span>✧</span> HOT DRINK & SNACK <span>✧</span></div>
+        <div class="menu-item"><span class="item-name">Hot Chocolate / Artichoke Tea</span><span class="dots"></span><span class="item-price">200k</span></div>
+        <div class="menu-item"><span class="item-name">Khoai tây sấy hành</span><span class="dots"></span><span class="item-price">59k</span></div>
+        <div class="menu-item"><span class="item-name">Da heo cháy tỏi</span><span class="dots"></span><span class="item-price">69k</span></div>
+        <div class="menu-item"><span class="item-name">Mixed nuts / Cheese / Fruit</span><span class="dots"></span><span class="item-price">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="live-music">🎵 LIVE ACOUSTIC · 19:00 – 23:00 🎵</div>
+  <div class="calligraphy-signature">Calla Lily</div>
+  <div class="footer">57 Hà Huy Tập · Phường Xuân Hương · Đà Lạt</div>
+  <div class="page-number">— 1 —</div>
+</div>
+</body>
+</html>
