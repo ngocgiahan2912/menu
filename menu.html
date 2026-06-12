@@ -4,200 +4,364 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Calla Lily · Menu</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-@page { size: A4 portrait; margin: 0; }
-* { margin:0; padding:0; box-sizing:border-box; }
+@page { 
+  size: A4; 
+  margin: 0;
+}
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
 
 body {
   background: #c8bfaf;
   font-family: 'Cormorant Garamond', Georgia, serif;
   color: #2c1a10;
   padding: 20px;
-}
-
-/* ─── PAGE SHELL ─── A4 CHUẨN ─── */
-.page {
-  width: 210mm;
-  height: 297mm;
-  margin: 16px auto;
-  background: #fdf8ef;
-  position: relative;
-  padding: 40px 48px 40px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.13);
   display: flex;
   flex-direction: column;
-  page-break-after: always;
-  break-inside: avoid;
-  overflow: hidden;
+  align-items: center;
 }
 
-.page::before { content:''; position:absolute; inset:14px; border:0.6px solid #c9a96e; pointer-events:none; z-index:1; }
-.page::after  { content:''; position:absolute; inset:22px; border:0.3px solid rgba(224,201,136,0.6); pointer-events:none; z-index:1; }
-
-/* ─── PAGE HEADER (có logo + chữ Calla Lily trên mọi trang trừ bìa) ─── */
-.page-header {
-  text-align:center;
-  padding-bottom:12px;
-  margin-bottom:20px;
-  border-bottom:0.5px solid #e0c988;
-  flex-shrink:0;
+/* ─── TRANG A4 CHUẨN ─── */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fdf8ef;
+  margin: 16px auto;
+  padding: 28px 35px 28px;
   position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  page-break-after: always;
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Viền trang */
+.page-border {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid #c9a96e;
+  pointer-events: none;
+  z-index: 1;
+}
+.page-border-inner {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  border: 0.5px solid rgba(201, 169, 110, 0.5);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── HEADER TRANG ─── */
+.page-header {
+  text-align: center;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e0c988;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 .page-header::after {
   content: '✦';
   position: absolute;
-  bottom: -8px;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 11px;
+  font-size: 12px;
   color: #c9a96e;
   background: #fdf8ef;
-  padding: 0 6px;
-  line-height: 1;
+  padding: 0 10px;
 }
-.page-header .logo-small { width:48px; margin-bottom:6px; }
-.page-header .title-small { font-family:'Montserrat',sans-serif; font-size:13px; letter-spacing:5px; color:#a07840; font-weight:400; }
+.page-header .logo-small { 
+  width: 56px; 
+  margin-bottom: 8px; 
+}
+.page-header .title-small { 
+  font-family: 'Montserrat', sans-serif; 
+  font-size: 14px; 
+  letter-spacing: 6px; 
+  color: #a07840; 
+  font-weight: 600;
+}
 
-/* ─── COVER (BÌA - không có header) ─── */
-.cover { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-.cover-logo img { width:140px; margin-bottom:28px; filter: drop-shadow(0 2px 8px rgba(160,120,64,0.15)); }
-.cover-name { font-family:'Cinzel',serif; font-size:44px; letter-spacing:14px; color:#1e0f08; font-weight:500; }
-.cover-sub  { font-family:'Cinzel',serif; font-size:15px; letter-spacing:8px; color:#a07840; margin-top:10px; font-weight:400; }
-.cover-ornament { display:flex; align-items:center; gap:14px; margin:30px auto; }
-.cover-ornament::before,.cover-ornament::after { content:''; width:72px; height:0.5px; background: linear-gradient(90deg, transparent, #c9a96e); }
-.cover-ornament span { color:#c9a96e; font-size:16px; }
-.cover-tagline { font-style:italic; font-size:18px; color:#7a5a38; letter-spacing:1.5px; }
-.cover-bottom { display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:52px; }
-.cover-bottom-line { width:0.5px; height:32px; background: linear-gradient(to bottom, #c9a96e, transparent); }
-.cover-est { font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:6px; color:#b89060; font-weight:300; }
+/* ─── SỐ TRANG ─── */
+.page-number {
+  position: absolute;
+  bottom: 18px;
+  right: 28px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #a07840;
+  background: #fdf8ef;
+  padding: 3px 10px;
+  z-index: 2;
+}
+
+/* ─── BÌA ─── */
+.cover {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.cover-logo img { width: 160px; margin-bottom: 32px; }
+.cover-name { font-family: 'Cinzel', serif; font-size: 48px; font-weight: 800; letter-spacing: 14px; color: #1e0f08; }
+.cover-sub { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 600; letter-spacing: 8px; color: #a07840; margin-top: 10px; }
+.cover-ornament { display: flex; align-items: center; gap: 18px; margin: 32px auto; }
+.cover-ornament::before, .cover-ornament::after { content: ''; width: 70px; height: 0.5px; background: linear-gradient(90deg, transparent, #c9a96e); }
+.cover-ornament span { color: #c9a96e; font-size: 16px; font-weight: bold; }
+.cover-tagline { font-style: italic; font-size: 18px; font-weight: 500; color: #7a5a38; letter-spacing: 1.5px; }
+.cover-bottom { margin-top: 60px; }
+.cover-bottom-line { width: 0.5px; height: 32px; background: linear-gradient(to bottom, #c9a96e, transparent); margin: 0 auto 10px; }
+.cover-est { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 6px; color: #b89060; }
 
 /* ─── SECTION HEADING ─── */
 .sec-head {
-  display: flex; align-items: center;
-  flex-shrink: 0; margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  margin: 18px 0 16px;
+  flex-shrink: 0;
 }
 .sec-head::before, .sec-head::after {
-  content: ''; flex: 1; height: 0.5px;
+  content: '';
+  flex: 1;
+  height: 0.5px;
   background: linear-gradient(90deg, transparent, #d4b878);
 }
 .sec-head::after { background: linear-gradient(270deg, transparent, #d4b878); }
-.sec-title-wrap { display: flex; align-items: center; gap: 8px; padding: 0 14px; }
-.sec-title { font-family:'Montserrat',sans-serif; font-size:15px; letter-spacing:5px; color:#8b4a24; font-weight:700; white-space:nowrap; }
-.sec-title-diamond { color:#c9a96e; font-size:9px; line-height:1; }
-.sec-note { font-family:'Montserrat',sans-serif; font-size:11px; color:#a07840; font-weight:400; font-style:italic; }
+.sec-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 15px;
+}
+.sec-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  letter-spacing: 5px;
+  color: #8b4a24;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.sec-title-diamond { color: #c9a96e; font-size: 10px; font-weight: bold; }
+.sec-note {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  color: #a07840;
+  font-weight: 500;
+  font-style: italic;
+}
 
-/* ─── SIGNATURE ROWS ─── */
-.sig-block { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; }
-.menu-row  { display:flex; gap:24px; align-items:flex-start; padding: 12px 0; border-bottom: 0.3px solid rgba(201,169,110,0.25); }
+/* ─── MENU ROW (SIGNATURE) ─── */
+.sig-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.menu-row {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 0.5px solid rgba(201, 169, 110, 0.3);
+}
 .menu-row:last-child { border-bottom: none; }
-.menu-row.reverse { flex-direction:row-reverse; }
-.menu-img  { width:120px; flex-shrink:0; }
-.menu-img img { width:100%; height:auto; border:0.5px solid #c9a96e; box-shadow: 2px 3px 10px rgba(140,80,20,0.08); background:#fdf8ef; display:block; object-fit:contain; }
-.menu-content { flex:1; }
+.menu-row.reverse { flex-direction: row-reverse; }
+.menu-img { width: 170px; flex-shrink: 0; }
+.menu-img img { width: 100%; height: auto; border: 1px solid #c9a96e; border-radius: 6px; background: #fdf8ef; display: block; box-shadow: 2px 4px 10px rgba(0,0,0,0.05); }
+.menu-content { flex: 1; }
 
-.item-name   { font-family:'Cinzel',serif; font-size:22px; font-weight:500; color:#1e0f08; letter-spacing:1px; }
-.item-recipe { font-size:13px; color:#a07840; margin:5px 0 7px; font-family:'Montserrat',sans-serif; font-weight:400; letter-spacing:0.3px; font-style:italic; }
-.item-desc   { font-size:15px; line-height:1.5; color:#3a2a1a; }
-.item-desc-vi  { display:block; margin-bottom:4px; }
-.item-desc-en  { display:block; font-style:italic; color:#7a5a38; font-size:14px; }
-.item-price-row { display:flex; align-items:center; gap:10px; margin-top:8px; }
-.item-price    { font-family:'Cinzel',serif; font-size:22px; color:#8b4a24; }
+.item-name { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700; color: #1e0f08; letter-spacing: 1px; margin-bottom: 8px; }
+.item-recipe { font-size: 14px; color: #a07840; margin: 6px 0 12px; font-family: 'Montserrat', sans-serif; font-weight: 500; font-style: italic; }
 
-/* ─── TWO-COL LIST ─── */
-.two-col { display:grid; grid-template-columns:1fr 1fr; gap:0 24px; }
-.classic-item { display:flex; justify-content:space-between; align-items:baseline; gap:8px; padding:7px 0; border-bottom:0.3px solid rgba(201,169,110,0.25); }
-.classic-name  { font-size:17px; color:#2c1a10; font-family:'Cormorant Garamond',serif; flex:1; min-width:0; }
-.classic-price { font-family:'Montserrat',sans-serif; font-size:14px; color:#8b4a24; white-space:nowrap; font-weight:500; flex-shrink:0; }
-.price-note    { font-size:11px; color:#a07840; font-style:italic; margin-left:2px; font-weight:300; }
+/* MÔ TẢ TIẾNG VIỆT TO HƠN NỮA */
+.item-desc {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #3a2a1a;
+}
+.item-desc-vi {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #2c1a10;
+}
+.item-desc-en {
+  display: block;
+  font-style: italic;
+  color: #7a5a38;
+  font-size: 16px;
+  font-weight: 500;
+}
+.item-price-row { margin-top: 14px; }
+.item-price { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 800; color: #8b4a24; }
 
-/* ─── SPIRIT TABLE ─── */
-.spirit-header { display:grid; grid-template-columns:1fr 64px 74px 74px; padding:0 0 6px; margin-bottom:2px; border-bottom:0.5px solid #c9a96e; }
-.spirit-header span { font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:1.5px; color:#a07840; text-align:right; text-transform:uppercase; font-weight:600; }
-.spirit-header span:first-child { text-align:left; }
-.spirit-item { display:grid; grid-template-columns:1fr 64px 74px 74px; align-items:center; padding:5px 4px; border-bottom:0.3px solid rgba(201,169,110,0.2); }
-.spirit-item:nth-child(odd)  { background: rgba(253,248,239,0.6); }
-.spirit-item:nth-child(even) { background: rgba(240,230,210,0.2); }
-.spirit-name { font-size:15px; color:#2c1a10; font-family:'Cormorant Garamond',serif; }
-.spirit-cell { font-family:'Montserrat',sans-serif; font-size:13px; color:#8b4a24; text-align:right; font-weight:500; }
-.spirit-cell.dim { color:#c0a878; font-size:12px; font-style:italic; font-family:'Cormorant Garamond',serif; }
+/* ─── 2 CỘT ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 28px;
+}
+.classic-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 0.5px solid rgba(201, 169, 110, 0.3);
+}
+.classic-name { font-size: 19px; font-weight: 600; color: #2c1a10; flex: 1; }
+.classic-price { font-family: 'Montserrat', sans-serif; font-size: 17px; color: #8b4a24; white-space: nowrap; font-weight: 700; }
+.price-note { font-size: 11px; color: #a07840; font-style: italic; font-weight: 500; }
+
+/* ─── BẢNG RƯỢU ─── */
+.spirit-header {
+  display: grid;
+  grid-template-columns: 1fr 65px 75px 75px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c9a96e;
+  margin-bottom: 6px;
+}
+.spirit-header span { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #a07840; text-align: right; text-transform: uppercase; }
+.spirit-header span:first-child { text-align: left; }
+.spirit-item {
+  display: grid;
+  grid-template-columns: 1fr 65px 75px 75px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 0.3px solid rgba(201, 169, 110, 0.2);
+}
+.spirit-name { font-size: 17px; font-weight: 600; color: #2c1a10; }
+.spirit-cell { font-family: 'Montserrat', sans-serif; font-size: 15px; color: #8b4a24; text-align: right; font-weight: 700; }
+.spirit-cell.dim { color: #c0a878; font-style: italic; font-weight: 500; }
 
 /* ─── SNACK ─── */
-.snack-item  { display:flex; justify-content:space-between; align-items:baseline; padding:7px 0; border-bottom:0.3px solid rgba(201,169,110,0.25); }
-.snack-name  { font-size:17px; color:#2c1a10; font-family:'Cormorant Garamond',serif; }
-.snack-name small { display:block; font-size:12px; color:#8a6a40; font-style:italic; margin-top:2px; }
-.snack-price { font-family:'Montserrat',sans-serif; font-size:14px; color:#8b4a24; white-space:nowrap; font-weight:500; }
+.snack-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 0.5px solid rgba(201, 169, 110, 0.3);
+}
+.snack-name { font-size: 19px; font-weight: 600; color: #2c1a10; }
+.snack-name small { display: block; font-size: 13px; font-weight: 500; color: #8a6a40; font-style: italic; margin-top: 3px; }
+.snack-price { font-family: 'Montserrat', sans-serif; font-size: 17px; color: #8b4a24; font-weight: 700; }
 
 /* ─── COMBO ─── */
-.combo-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; flex:1; }
-.combo-item {
-  border:0.5px solid #d4b878;
-  background: linear-gradient(160deg, #fffef9, #fdf5e4);
-  padding:16px 14px 14px;
-  display:flex; flex-direction:column; justify-content:space-between;
-  position: relative; overflow: hidden;
+.combo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 16px 0 20px;
 }
-.combo-item::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, transparent, #c9a96e, transparent); }
-.combo-item::after  { content:'✦'; position:absolute; bottom:12px; right:14px; font-size:10px; color:rgba(201,169,110,0.3); }
-.combo-name  { font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:#2c1a10; letter-spacing:0.5px; line-height:1.35; }
-.combo-name small { display:block; font-size:12px; color:#7a5a38; font-style:italic; font-family:'Cormorant Garamond',serif; font-weight:normal; margin-top:6px; line-height:1.5; }
-.combo-price { font-family:'Cinzel',serif; font-size:22px; color:#8b4a24; font-weight:600; margin-top:12px; }
+.combo-card {
+  background: linear-gradient(145deg, #fffef7, #fdf3e0);
+  border: 1.5px solid #d4b878;
+  border-radius: 20px;
+  padding: 22px 14px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+}
+.combo-card::before { content: ''; position: absolute; top: 0; left: 20%; right: 20%; height: 3px; background: linear-gradient(90deg, transparent, #c9a96e, transparent); }
+.combo-name { font-family: 'Cinzel', serif; font-size: 20px; font-weight: 800; color: #2c1a10; margin-bottom: 14px; }
+.combo-name small { display: block; font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; color: #7a5a38; font-style: italic; margin-top: 8px; line-height: 1.5; }
+.combo-price { font-family: 'Cinzel', serif; font-size: 30px; font-weight: 800; color: #8b4a24; margin-top: 16px; padding-top: 12px; border-top: 1.5px dashed rgba(201, 169, 110, 0.6); }
+
+
+
 
 /* ─── FOOTER ─── */
-.page-footer { text-align:center; margin-top:auto; padding-top:14px; flex-shrink:0; position:relative; }
-.page-footer::before { content:''; display:block; height:0.5px; background: linear-gradient(90deg, transparent, #c9a96e 30%, #c9a96e 70%, transparent); margin-bottom:12px; }
-.footer-music { font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:3px; color:#a07840; margin-bottom:6px; font-weight:300; }
-.footer-addr  { font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:2px; color:#b89060; font-style:italic; }
+.page-footer {
+  text-align: center;
+  margin-top: auto;
+  padding-top: 18px;
+  flex-shrink: 0;
+}
+.page-footer::before { content: ''; display: block; height: 0.5px; background: linear-gradient(90deg, transparent, #c9a96e 30%, #c9a96e 70%, transparent); margin-bottom: 14px; }
+.footer-music { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 3.5px; color: #a07840; margin-bottom: 6px; }
+.footer-addr { font-size: 14px; font-weight: 500; letter-spacing: 1.5px; color: #b89060; font-style: italic; }
 
-/* spacing helpers */
-.mt16 { margin-top:16px; }
-.mt20 { margin-top:20px; }
-.mt24 { margin-top:24px; }
+/* ─── KHOẢNG CÁCH ─── */
+.mt16 { margin-top: 18px; }
+.mt20 { margin-top: 22px; }
+.mt24 { margin-top: 26px; }
+.mb8 { margin-bottom: 8px; }
 
-/* ─── RESPONSIVE CHO ĐIỆN THOẠI ─── */
+/* ─── TRANG 6 & 7: TÁCH BIỆT RÕ HƠN ─── */
+.page-spacer {
+  flex: 1;
+}
+.section-group {
+  margin-bottom: 28px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgba(201, 169, 110, 0.4);
+}
+.section-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* Responsive */
 @media (max-width: 700px) {
-  .page { width:100%; height:auto; padding:28px 20px; }
-  .menu-row, .menu-row.reverse { flex-direction:column !important; align-items:center !important; gap:12px !important; }
-  .menu-img { width:140px !important; }
-  .two-col { grid-template-columns:1fr !important; }
-  .combo-grid { grid-template-columns:1fr !important; }
-  .spirit-item { grid-template-columns:1fr 50px 54px 54px !important; }
-  .item-name { font-size:24px !important; text-align:center !important; }
-  .item-recipe, .item-desc, .item-price-row { text-align:center; }
-  .item-price-row { justify-content:center !important; }
-}
-@media (max-width: 480px) {
-  .page { padding:18px 14px; }
-  .cover-name { font-size:28px !important; letter-spacing:5px !important; }
-  .menu-img { width:120px !important; }
+  .page { width: 100%; min-height: auto; padding: 20px; }
+  .menu-row, .menu-row.reverse { flex-direction: column !important; align-items: center !important; gap: 15px; }
+  .menu-img { width: 180px; }
+  .two-col { grid-template-columns: 1fr; }
+  .combo-grid { grid-template-columns: 1fr; }
+  .item-desc-vi { font-size: 20px !important; text-align: center; }
 }
 
-/* ─── IN A4 ─── */
 @media print {
-  body { background:white; padding:0; margin:0; }
-  .page { margin:0 auto; box-shadow:none; width:210mm; height:297mm; page-break-after:always; break-after:page; overflow:hidden; }
+  body { background: white; padding: 0; margin: 0; }
+  .page { margin: 0 auto; box-shadow: none; page-break-after: always; }
+  .page-border, .page-border-inner { display: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ TRANG 1 · BÌA ═══ -->
+<!-- TRANG 1 · BÌA -->
 <div class="page">
+  <div class="page-border"></div>
+  <div class="page-border-inner"></div>
   <div class="cover">
     <div class="cover-logo"><img src="logo.png" alt="Calla Lily"></div>
     <div class="cover-name">CALLA LILY</div>
-    <div class="cover-sub">ACOUSTIC BAR</div>
-    <div class="cover-ornament"><span>✦</span></div>
-    <div class="cover-tagline">live &amp; wine &amp; every night</div>
+    <div class="cover-sub" style="font-size: 20px; letter-spacing: 10px;">ACOUSTIC BAR</div>
+    <div class="cover-ornament"><span style="font-size: 22px;">✦</span></div>
+    <div class="cover-tagline" style="font-size: 22px; letter-spacing: 2px;">live &amp; wine &amp; every night</div>
     <div class="cover-bottom">
       <div class="cover-bottom-line"></div>
       <div class="cover-est">EST. 2026</div>
     </div>
   </div>
+  <div class="page-number">1 / 7</div>
 </div>
 
-<!-- ═══ TRANG 2 · SIGNATURE (3 món) ═══ -->
+<!-- TRANG 2 · SIGNATURE (3 món) -->
 <div class="page">
+  <div class="page-border"></div>
+  <div class="page-border-inner"></div>
   <div class="page-header">
     <img src="logo.png" alt="" class="logo-small">
     <div class="title-small">CALLA LILY</div>
@@ -243,10 +407,13 @@ body {
       </div>
     </div>
   </div>
+  <div class="page-number">2 / 7</div>
 </div>
 
-<!-- ═══ TRANG 3 · SIGNATURE (4 món) ═══ -->
+<!-- TRANG 3 · SIGNATURE (4 món) -->
 <div class="page">
+  <div class="page-border"></div>
+  <div class="page-border-inner"></div>
   <div class="page-header">
     <img src="logo.png" alt="" class="logo-small">
     <div class="title-small">CALLA LILY</div>
@@ -304,15 +471,17 @@ body {
       </div>
     </div>
   </div>
+  <div class="page-number">3 / 7</div>
 </div>
 
-<!-- ═══ TRANG 4 · MOCKTAIL + CLASSIC COCKTAIL ═══ -->
+<!-- TRANG 4 · MOCKTAIL + CLASSIC COCKTAIL -->
 <div class="page">
+  <div class="page-border"></div>
+  <div class="page-border-inner"></div>
   <div class="page-header">
     <img src="logo.png" alt="" class="logo-small">
     <div class="title-small">CALLA LILY</div>
   </div>
-
   <div class="sec-head">
     <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">MOCKTAIL</span><span class="sec-title-diamond">◆</span></div>
   </div>
@@ -354,8 +523,7 @@ body {
       </div>
     </div>
   </div>
-
-  <div class="sec-head mt20">
+  <div class="sec-head mt16">
     <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">CLASSIC COCKTAIL</span><span class="sec-title-diamond">◆</span></div>
   </div>
   <div class="two-col">
@@ -375,23 +543,25 @@ body {
       <div class="classic-item"><span class="classic-name">Margarita</span><span class="classic-price">240k</span></div>
     </div>
   </div>
+  <div class="page-number">4 / 7</div>
 </div>
 
-<!-- ═══ TRANG 5 · SHOT & BOTTLE + BEER + SOFT DRINK ═══ -->
+<!-- TRANG 5 · SHOT & BOTTLE + BEER -->
 <div class="page">
+  <div class="page-border"></div>
+  <div class="page-border-inner"></div>
   <div class="page-header">
     <img src="logo.png" alt="" class="logo-small">
     <div class="title-small">CALLA LILY</div>
   </div>
-
   <div class="sec-head">
     <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">SHOT &amp; BOTTLE</span><span class="sec-title-diamond">◆</span></div>
   </div>
   <div class="spirit-header">
     <span></span>
-    <span>1 shot</span>
-    <span>2 shots<br><span style="font-size:7px;font-weight:300;">(for 1 pax)</span></span>
-    <span>bottle<br><span style="font-size:7px;font-weight:300;">(for 5 pax)</span></span>
+    <span class="spirit-header-cell">1 shot <span class="spirit-note">(for 1 pax)</span></span>
+    <span class="spirit-header-cell">2 shots <span class="spirit-note">(for 1 pax)</span></span>
+    <span class="spirit-header-cell">bottle <span class="spirit-note">(for 5 pax)</span></span>
   </div>
   <div>
     <div class="spirit-item"><span class="spirit-name">Captain Morgan Gold</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
@@ -413,7 +583,6 @@ body {
     <div class="spirit-item"><span class="spirit-name">Campari</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
     <div class="spirit-item"><span class="spirit-name">Kahlua</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
   </div>
-
   <div class="sec-head mt16">
     <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">BEER</span><span class="sec-title-diamond">◆</span></div>
   </div>
@@ -421,112 +590,166 @@ body {
     <div><div class="classic-item"><span class="classic-name">Corona</span><span class="classic-price">190k</span></div></div>
     <div><div class="classic-item"><span class="classic-name">Budweiser</span><span class="classic-price">190k</span></div></div>
   </div>
+  <div class="page-number">5 / 7</div>
+</div>
 
-  <div class="sec-head mt16">
-    <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">SOFT DRINK</span><span class="sec-title-diamond">◆</span></div>
+<!-- TRANG 6 · SOFT DRINK + WINE + HOT DRINK -->
+<div class="page">
+  <div class="page-border"></div>
+  <div class="page-border-inner"></div>
+  <div class="page-header">
+    <img src="logo.png" alt="" class="logo-small">
+    <div class="title-small">CALLA LILY</div>
   </div>
-  <div style="text-align:center; margin-bottom:8px; margin-top:-6px;">
-    <span style="font-family:'Cormorant Garamond',serif; font-size:12px; color:#a07840; font-style:italic; letter-spacing:0.5px;">✦ From 2nd round ✦</span>
-  </div>
-  <div class="two-col">
-    <div>
-      <div class="classic-item"><span class="classic-name">Aquafina</span><span class="classic-price">50k</span></div>
-      <div class="classic-item"><span class="classic-name">Coca Cola</span><span class="classic-price">50k</span></div>
-      <div class="classic-item"><span class="classic-name">7UP</span><span class="classic-price">50k</span></div>
+  
+  <!-- NHÓM SOFT DRINK (có chú thích From round 2) -->
+  <div class="section-group">
+    <div class="sec-head">
+      <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">SOFT DRINK</span><span class="sec-title-diamond">◆</span></div>
     </div>
-    <div>
-      <div class="classic-item"><span class="classic-name">Schweppes</span><span class="classic-price">50k</span></div>
-      <div class="classic-item">
-        <span class="classic-name">Add-on mixer
-          <span style="display:block;font-size:11px;color:#8a6a40;font-style:italic;margin-top:2px;">tonic / coke / redbull / soda</span>
-        </span>
-        <span class="classic-price">30k</span>
+    <div class="softdrink-note" style="text-align: center; margin-top: 4px; margin-bottom: 12px;"> From round 2 </div>
+    <div class="two-col">
+      <div>
+        <div class="classic-item"><span class="classic-name">Aquafina</span><span class="classic-price">50k</span></div>
+        <div class="classic-item"><span class="classic-name">Coca Cola</span><span class="classic-price">50k</span></div>
+        <div class="classic-item"><span class="classic-name">7UP</span><span class="classic-price">50k</span></div>
+      </div>
+      <div>
+        <div class="classic-item"><span class="classic-name">Schweppes</span><span class="classic-price">50k</span></div>
+        <div class="classic-item">
+          <span class="classic-name">Add-on mixer <span style="display:block;font-size:11px;color:#8a6a40;font-weight:500;">tonic / coke / redbull / soda</span></span>
+          <span class="classic-price">30k</span>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- NHÓM WINE -->
+  <div class="section-group">
+    <div class="sec-head">
+      <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">WINE</span><span class="sec-note">(bottle for 5 pax)</span><span class="sec-title-diamond">◆</span></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="classic-item"><span class="classic-name">IL Pumo Negroamaro</span><span class="classic-price">200k <span class="price-note">(glass)</span> / 1.4m</span></div>
+        <div class="classic-item"><span class="classic-name">Marquis de Beylot</span><span class="classic-price">1.4m</span></div>
+        <div class="classic-item"><span class="classic-name">Château La Diligente</span><span class="classic-price">1.7m</span></div>
+        <div class="classic-item"><span class="classic-name">Crocus L'Atelier</span><span class="classic-price">2.0m</span></div>
+        <div class="classic-item"><span class="classic-name">F Negroamaro</span><span class="classic-price">3.0m</span></div>
+      </div>
+      <div>
+        <div class="classic-item"><span class="classic-name">Cielo Sauvignon Blanc</span><span class="classic-price">200k <span class="price-note">(glass)</span> / 1.4m</span></div>
+        <div class="classic-item"><span class="classic-name">Deinhard Riesling</span><span class="classic-price">1.4m</span></div>
+        <div class="classic-item"><span class="classic-name">Talò Chardonnay</span><span class="classic-price">1.7m</span></div>
+        <div class="classic-item"><span class="classic-name">CF Collefrisio Cerasuolo</span><span class="classic-price">1.7m</span></div>
+        <div class="classic-item"><span class="classic-name">Tavernello Lambrusco</span><span class="classic-price">1.5m</span></div>
+        <div class="classic-item"><span class="classic-name">Tini Prosecco</span><span class="classic-price">1.5m</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NHÓM HOT DRINK -->
+  <div class="section-group">
+    <div class="sec-head">
+      <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">HOT DRINK</span><span class="sec-title-diamond">◆</span></div>
+    </div>
+    <div class="two-col">
+      <div><div class="classic-item"><span class="classic-name">Hot Chocolate</span><span class="classic-price">200k</span></div></div>
+      <div><div class="classic-item"><span class="classic-name">Artichoke Tea</span><span class="classic-price">200k</span></div></div>
+      <div><div class="classic-item"><span class="classic-name">Lemon &amp; Ginger Tea</span><span class="classic-price">200k</span></div></div>
+    </div>
+  </div>
+
+  <div class="page-spacer"></div>
+  <div class="page-number">6 / 7</div>
 </div>
 
-<!-- ═══ TRANG 6 · WINE + HOT DRINK + SNACK + COMBO ═══ -->
+<!-- TRANG 7 · SNACK + COMBO + FOOTER (TÁCH BIỆT RÕ) -->
 <div class="page">
+  <div class="page-border"></div>
+  <div class="page-border-inner"></div>
   <div class="page-header">
     <img src="logo.png" alt="" class="logo-small">
     <div class="title-small">CALLA LILY</div>
   </div>
 
-  <div class="sec-head">
-    <div class="sec-title-wrap">
-      <span class="sec-title-diamond">◆</span>
-      <span class="sec-title">WINE</span>
-      <span class="sec-note" style="margin-left:6px;">(bottle for 5 pax)</span>
-      <span class="sec-title-diamond">◆</span>
+  <!-- NHÓM SNACK -->
+  <div class="section-group">
+    <div class="sec-head">
+      <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">SNACK</span><span class="sec-title-diamond">◆</span></div>
     </div>
-  </div>
-  <div class="two-col">
-    <div>
-      <div class="classic-item"><span class="classic-name">IL Pumo Negroamaro</span><span class="classic-price">200k <span class="price-note">(glass)</span> / 1.4m</span></div>
-      <div class="classic-item"><span class="classic-name">Marquis de Beylot</span><span class="classic-price">1.4m</span></div>
-      <div class="classic-item"><span class="classic-name">Château La Diligente</span><span class="classic-price">1.7m</span></div>
-      <div class="classic-item"><span class="classic-name">Crocus L'Atelier</span><span class="classic-price">2.0m</span></div>
-      <div class="classic-item"><span class="classic-name">F Negroamaro</span><span class="classic-price">3.0m</span></div>
-    </div>
-    <div>
-      <div class="classic-item"><span class="classic-name">Cielo Sauvignon Blanc</span><span class="classic-price">200k <span class="price-note">(glass)</span> / 1.4m</span></div>
-      <div class="classic-item"><span class="classic-name">Deinhard Riesling</span><span class="classic-price">1.4m</span></div>
-      <div class="classic-item"><span class="classic-name">Talò Chardonnay</span><span class="classic-price">1.7m</span></div>
-      <div class="classic-item"><span class="classic-name">CF Collefrisio Cerasuolo</span><span class="classic-price">1.7m</span></div>
-      <div class="classic-item"><span class="classic-name">Tavernello Lambrusco</span><span class="classic-price">1.5m</span></div>
-      <div class="classic-item"><span class="classic-name">Tini Prosecco</span><span class="classic-price">1.5m</span></div>
-    </div>
-  </div>
-
-  <div class="sec-head mt16">
-    <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">HOT DRINK</span><span class="sec-title-diamond">◆</span></div>
-  </div>
-  <div class="two-col">
-    <div>
-      <div class="classic-item"><span class="classic-name">Hot Chocolate</span><span class="classic-price">200k</span></div>
-      <div class="classic-item"><span class="classic-name">Artichoke Tea</span><span class="classic-price">200k</span></div>
-    </div>
-    <div>
-      <div class="classic-item"><span class="classic-name">Lemon &amp; Ginger Tea</span><span class="classic-price">200k</span></div>
+    <div class="two-col">
+      <div>
+        <div class="snack-item">
+          <div class="snack-name">
+            Phô mai sợi hun khói
+            <small class="snack-name-en" style="font-size: 14px;">Smoked Cheese String</small>
+          </div>
+          <div class="snack-price">69k</div>
+        </div>
+        <div class="snack-item">
+          <div class="snack-name">
+            Khoai tây sấy hành
+            <small class="snack-name-en" style="font-size: 14px;">Onion Crispy Potato</small>
+          </div>
+          <div class="snack-price">59k</div>
+        </div>
+      </div>
+      <div>
+        <div class="snack-item">
+          <div class="snack-name">
+            Da heo cháy tỏi
+            <small class="snack-name-en" style="font-size: 14px;">Garlic Crispy Pork Skin</small>
+          </div>
+          <div class="snack-price">69k</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="sec-head mt16">
-    <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">SNACK</span><span class="sec-title-diamond">◆</span></div>
-  </div>
-  <div class="two-col">
-    <div>
-      <div class="snack-item"><div class="snack-name">Smoked Cheese String<small>Phô mai sợi hun khói</small></div><div class="snack-price">69k</div></div>
-      <div class="snack-item"><div class="snack-name">Onion Crispy Potato<small>Khoai tây sấy hành</small></div><div class="snack-price">59k</div></div>
+  <!-- NHÓM COMBO (chữ to hơn) -->
+  <div class="section-group">
+    <div class="sec-head">
+      <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">COMBO</span><span class="sec-title-diamond">◆</span></div>
     </div>
-    <div>
-      <div class="snack-item"><div class="snack-name">Garlic Crispy Pork Skin<small>Da heo cháy tỏi</small></div><div class="snack-price">69k</div></div>
+    <div class="combo-grid">
+      <div class="combo-card">
+        <div class="combo-name">SOLO NIGHT
+          <small style="display: block; font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: #7a5a38; font-style: italic; margin-top: 10px; line-height: 1.4;">1 Cocktail + 1 Snack bất kì</small>
+          <small style="display: block; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: #a07840; font-style: italic; margin-top: 5px;">1 Cocktail + Any 1 Snack</small>
+        </div>
+        <div class="combo-price">299k</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-name">SIGNATURE EXPERIENCE
+          <small style="display: block; font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: #7a5a38; font-style: italic; margin-top: 10px; line-height: 1.4;">1 Signature + 1 Snack bất kì</small>
+          <small style="display: block; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: #a07840; font-style: italic; margin-top: 5px;">1 Signature + Any 1 Snack</small>
+        </div>
+        <div class="combo-price">319k</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-name">DATE NIGHT
+          <small style="display: block; font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: #7a5a38; font-style: italic; margin-top: 10px; line-height: 1.4;">2 đồ uống bất kì + Refill Snack miễn phí</small>
+          <small style="display: block; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: #a07840; font-style: italic; margin-top: 5px;">Any 2 drinks + Free Snack Refill</small>
+        </div>
+        <div class="combo-price">599k</div>
+      </div>
     </div>
   </div>
 
-  <div class="sec-head mt16">
-    <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">COMBO</span><span class="sec-title-diamond">◆</span></div>
-  </div>
-  <div class="combo-grid" style="flex:1; align-content:stretch;">
-    <div class="combo-item">
-      <div class="combo-name">SOLO NIGHT<small>1 Cocktail<br>+ 1 Snack bất kì</small></div>
-      <div class="combo-price">299k</div>
-    </div>
-    <div class="combo-item">
-      <div class="combo-name">SIGNATURE EXPERIENCE<small>1 Signature<br>+ 1 Snack bất kì</small></div>
-      <div class="combo-price">319k</div>
-    </div>
-    <div class="combo-item">
-      <div class="combo-name">DATE NIGHT<small>2 đồ uống bất kì<br>+ Refill Snack miễn phí</small></div>
-      <div class="combo-price">599k</div>
+  <!-- Câu ghi chú - phông to hơn, căn giữa (inline style) -->
+  <div class="note-section" style="margin: 20px 0 16px; padding: 18px 20px; background: linear-gradient(135deg, #fef9ef, #fdf5e8); border-radius: 12px; border-left: 4px solid #c9a96e; border-right: 1px solid rgba(201, 169, 110, 0.3);">
+    <div class="note-item" style="text-align: center;">
+      <div class="note-text-vi" style="font-size: 18px; font-weight: 700; color: #2c1a10; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.5px; margin-bottom: 6px;">Bắt đầu từ vòng 2, các món trong menu đồng giá 160k (trừ chai rượu)</div>
+      <div class="note-text-en" style="font-size: 14px; font-weight: 500; color: #a07840; font-style: italic; font-family: 'Montserrat', sans-serif; letter-spacing: 0.3px;">From the 2nd round, all drinks are priced at 160k (excluding wine bottles)</div>
     </div>
   </div>
 
   <div class="page-footer">
-    <div class="footer-music">✦ &nbsp; LIVE ACOUSTIC · 18:30 – 00:00 &nbsp; ✦</div>
+    <div class="footer-music">✦ LIVE ACOUSTIC · 18:30 – 00:00 ✦</div>
     <div class="footer-addr">57 Hà Huy Tập · Phường Xuân Hương · Đà Lạt</div>
   </div>
+  <div class="page-number">7 / 7</div>
 </div>
 
 </body>
