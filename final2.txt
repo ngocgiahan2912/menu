@@ -26,6 +26,7 @@ body {
   align-items: center;
 }
 
+/* ─── TRANG A4 CHUẨN ─── */
 .page {
   width: 210mm;
   min-height: 297mm;
@@ -40,6 +41,7 @@ body {
   flex-direction: column;
 }
 
+/* Viền trang */
 .page-border {
   position: absolute;
   top: 10px;
@@ -61,6 +63,7 @@ body {
   z-index: 1;
 }
 
+/* ─── HEADER TRANG ─── */
 .page-header {
   text-align: center;
   padding-bottom: 12px;
@@ -93,6 +96,7 @@ body {
   font-weight: 600;
 }
 
+/* ─── SỐ TRANG ─── */
 .page-number {
   position: absolute;
   bottom: 18px;
@@ -107,6 +111,7 @@ body {
   z-index: 2;
 }
 
+/* ─── BÌA ─── */
 .cover {
   flex: 1;
   display: flex;
@@ -126,6 +131,7 @@ body {
 .cover-bottom-line { width: 0.5px; height: 32px; background: linear-gradient(to bottom, #c9a96e, transparent); margin: 0 auto 10px; }
 .cover-est { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 6px; color: #b89060; }
 
+/* ─── SECTION HEADING ─── */
 .sec-head {
   display: flex;
   align-items: center;
@@ -162,6 +168,7 @@ body {
   font-style: italic;
 }
 
+/* ─── MENU ROW (SIGNATURE) ─── */
 .sig-block {
   flex: 1;
   display: flex;
@@ -184,6 +191,7 @@ body {
 .item-name { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700; color: #1e0f08; letter-spacing: 1px; margin-bottom: 8px; }
 .item-recipe { font-size: 14px; color: #a07840; margin: 6px 0 12px; font-family: 'Montserrat', sans-serif; font-weight: 500; font-style: italic; }
 
+/* MÔ TẢ TIẾNG VIỆT TO HƠN NỮA */
 .item-desc {
   font-size: 18px;
   font-weight: 500;
@@ -207,6 +215,7 @@ body {
 .item-price-row { margin-top: 14px; }
 .item-price { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 800; color: #8b4a24; }
 
+/* ─── 2 CỘT ─── */
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -224,6 +233,7 @@ body {
 .classic-price { font-family: 'Montserrat', sans-serif; font-size: 17px; color: #8b4a24; white-space: nowrap; font-weight: 700; }
 .price-note { font-size: 11px; color: #a07840; font-style: italic; font-weight: 500; }
 
+/* ─── BẢNG RƯỢU ─── */
 .spirit-header {
   display: grid;
   grid-template-columns: 1fr 65px 75px 75px;
@@ -244,6 +254,7 @@ body {
 .spirit-cell { font-family: 'Montserrat', sans-serif; font-size: 15px; color: #8b4a24; text-align: right; font-weight: 700; }
 .spirit-cell.dim { color: #c0a878; font-style: italic; font-weight: 500; }
 
+/* ─── SNACK ─── */
 .snack-item {
   display: flex;
   justify-content: space-between;
@@ -255,6 +266,7 @@ body {
 .snack-name small { display: block; font-size: 13px; font-weight: 500; color: #8a6a40; font-style: italic; margin-top: 3px; }
 .snack-price { font-family: 'Montserrat', sans-serif; font-size: 17px; color: #8b4a24; font-weight: 700; }
 
+/* ─── COMBO ─── */
 .combo-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -275,6 +287,10 @@ body {
 .combo-name small { display: block; font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; color: #7a5a38; font-style: italic; margin-top: 8px; line-height: 1.5; }
 .combo-price { font-family: 'Cinzel', serif; font-size: 30px; font-weight: 800; color: #8b4a24; margin-top: 16px; padding-top: 12px; border-top: 1.5px dashed rgba(201, 169, 110, 0.6); }
 
+
+
+
+/* ─── FOOTER ─── */
 .page-footer {
   text-align: center;
   margin-top: auto;
@@ -285,12 +301,16 @@ body {
 .footer-music { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 3.5px; color: #a07840; margin-bottom: 6px; }
 .footer-addr { font-size: 14px; font-weight: 500; letter-spacing: 1.5px; color: #b89060; font-style: italic; }
 
+/* ─── KHOẢNG CÁCH ─── */
 .mt16 { margin-top: 18px; }
 .mt20 { margin-top: 22px; }
 .mt24 { margin-top: 26px; }
 .mb8 { margin-bottom: 8px; }
 
-.page-spacer { flex: 1; }
+/* ─── TRANG 6 & 7: TÁCH BIỆT RÕ HƠN ─── */
+.page-spacer {
+  flex: 1;
+}
 .section-group {
   margin-bottom: 28px;
   padding-bottom: 12px;
@@ -301,6 +321,7 @@ body {
   margin-bottom: 0;
 }
 
+/* Responsive */
 @media (max-width: 700px) {
   .page { width: 100%; min-height: auto; padding: 20px; }
   .menu-row, .menu-row.reverse { flex-direction: column !important; align-items: center !important; gap: 15px; }
@@ -358,7 +379,7 @@ body {
           <span class="item-desc-vi">Rượu vang đỏ được hâm nóng cùng các loại gia vị thơm và thảo mộc, mang đến hương vị ấm áp và dễ chịu. Lựa chọn hoàn hảo cho những đêm se lạnh giữa cao nguyên Đà Lạt.</span>
           <span class="item-desc-en">Red wine gently heated with fragrant spices and herbs — the perfect choice for chilly nights in the highlands of Đà Lạt.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">235k</div></div>
+        <div class="item-price-row"><div class="item-price">259k</div></div>
       </div>
     </div>
     <div class="menu-row reverse">
@@ -370,7 +391,7 @@ body {
           <span class="item-desc-vi">Vang đỏ đậm đà hòa cùng trái cây tươi và hương anh đào ngọt dịu. Một lựa chọn lý tưởng cho những cuộc trò chuyện kéo dài bên tiếng nhạc.</span>
           <span class="item-desc-en">Rich red wine blended with fresh fruit and sweet cherry notes — ideal for long conversations with live music.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">220k</div></div>
+        <div class="item-price-row"><div class="item-price">240k</div></div>
       </div>
     </div>
     <div class="menu-row">
@@ -382,7 +403,7 @@ body {
           <span class="item-desc-vi">Vang trắng kết hợp rum vàng và hương cam thanh mát, hòa quyện cùng táo cắt hạt lựu. Hương vị trái cây nhẹ nhàng, tươi mát với hậu vị sảng khoái.</span>
           <span class="item-desc-en">White wine with gold rum and fresh orange zest — light, fruity, with an invigorating finish.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">220k</div></div>
+        <div class="item-price-row"><div class="item-price">240k</div></div>
       </div>
     </div>
   </div>
@@ -410,7 +431,7 @@ body {
           <span class="item-desc-vi">Hendrick's Gin hòa quyện cùng dâu tây và chanh tươi, được hoàn thiện bởi lớp foam mịn. Hương vị thanh thoát, cân bằng giữa vị chua nhẹ và ngọt dịu.</span>
           <span class="item-desc-en">Gin with fresh strawberry and lemon, finished with a smooth soft foam — ethereal, balanced.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">235k</div></div>
+        <div class="item-price-row"><div class="item-price">260k</div></div>
       </div>
     </div>
     <div class="menu-row reverse">
@@ -422,7 +443,7 @@ body {
           <span class="item-desc-vi">Hương mơ chín mọng hòa quyện cùng chút thảo mộc xanh từ húng quế. Một ly cocktail mang đến cảm giác thư thái và những rung cảm tích cực.</span>
           <span class="item-desc-en">Ripe apricot with fresh basil — relaxed, positive, vibrant.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">235k</div></div>
+        <div class="item-price-row"><div class="item-price">260k</div></div>
       </div>
     </div>
     <div class="menu-row">
@@ -434,7 +455,7 @@ body {
           <span class="item-desc-vi">Sự tương phản thú vị giữa Bourbon đậm đà và trái cây nhiệt đới tươi mát. Tạo nên cảm giác mạnh mẽ nhưng dễ tiếp cận.</span>
           <span class="item-desc-en">Rich Bourbon meets fresh tropical fruit — strong yet approachable.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">235k</div></div>
+        <div class="item-price-row"><div class="item-price">260k</div></div>
       </div>
     </div>
     <div class="menu-row reverse">
@@ -446,7 +467,7 @@ body {
           <span class="item-desc-vi">Hương bưởi hồng tươi sáng hòa quyện cùng gin và cam tươi, cân bằng bởi vị ngọt dịu của maple syrup.</span>
           <span class="item-desc-en">Bright grapefruit and gin, balanced by the gentle sweetness of maple syrup.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">235k</div></div>
+        <div class="item-price-row"><div class="item-price">260k</div></div>
       </div>
     </div>
   </div>
@@ -474,7 +495,7 @@ body {
           <span class="item-desc-vi">Lấy cảm hứng từ những thung lũng ngập nắng — hương dứa, chanh dây và gừng tươi, cân bằng hoàn hảo.</span>
           <span class="item-desc-en">Inspired by sun-drenched valleys — pineapple, passion fruit and fresh ginger, perfectly balanced.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">190k</div></div>
+        <div class="item-price-row"><div class="item-price">210k</div></div>
       </div>
     </div>
     <div class="menu-row reverse">
@@ -486,7 +507,7 @@ body {
           <span class="item-desc-vi">Những tầng hương quả chín mọng kết hợp cùng soda và bạc hà, mang đến cảm giác tươi mát.</span>
           <span class="item-desc-en">Layers of ripe berries with mint and soda — refreshing and familiar.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">190k</div></div>
+        <div class="item-price-row"><div class="item-price">210k</div></div>
       </div>
     </div>
     <div class="menu-row">
@@ -498,7 +519,7 @@ body {
           <span class="item-desc-vi">Sắc xanh hoa đậu biếc hòa quyện cùng bạc hà và chanh — gợi làn gió mát giữa những ngọn đồi xanh.</span>
           <span class="item-desc-en">Butterfly pea blue blended with mint and lime — like a cool breeze among green hills.</span>
         </div>
-        <div class="item-price-row"><div class="item-price">190k</div></div>
+        <div class="item-price-row"><div class="item-price">210k</div></div>
       </div>
     </div>
   </div>
@@ -507,19 +528,19 @@ body {
   </div>
   <div class="two-col">
     <div>
-      <div class="classic-item"><span class="classic-name">Mojito</span><span class="classic-price">210k</span></div>
-      <div class="classic-item"><span class="classic-name">God Father</span><span class="classic-price">220k</span></div>
-      <div class="classic-item"><span class="classic-name">Long Island Iced Tea</span><span class="classic-price">220k</span></div>
-      <div class="classic-item"><span class="classic-name">Tequila Sunrise</span><span class="classic-price">220k</span></div>
-      <div class="classic-item"><span class="classic-name">Old Fashioned</span><span class="classic-price">220k</span></div>
-      <div class="classic-item"><span class="classic-name">Negroni</span><span class="classic-price">220k</span></div>
+      <div class="classic-item"><span class="classic-name">Mojito</span><span class="classic-price">230k</span></div>
+      <div class="classic-item"><span class="classic-name">God Father</span><span class="classic-price">240k</span></div>
+      <div class="classic-item"><span class="classic-name">Long Island Iced Tea</span><span class="classic-price">240k</span></div>
+      <div class="classic-item"><span class="classic-name">Tequila Sunrise</span><span class="classic-price">240k</span></div>
+      <div class="classic-item"><span class="classic-name">Old Fashioned</span><span class="classic-price">240k</span></div>
+      <div class="classic-item"><span class="classic-name">Negroni</span><span class="classic-price">240k</span></div>
     </div>
     <div>
-      <div class="classic-item"><span class="classic-name">Singapore Sling</span><span class="classic-price">215k</span></div>
-      <div class="classic-item"><span class="classic-name">Dry Martini</span><span class="classic-price">215k</span></div>
-      <div class="classic-item"><span class="classic-name">Black Russian</span><span class="classic-price">215k</span></div>
-      <div class="classic-item"><span class="classic-name">White Russian</span><span class="classic-price">215k</span></div>
-      <div class="classic-item"><span class="classic-name">Margarita</span><span class="classic-price">220k</span></div>
+      <div class="classic-item"><span class="classic-name">Singapore Sling</span><span class="classic-price">235k</span></div>
+      <div class="classic-item"><span class="classic-name">Dry Martini</span><span class="classic-price">235k</span></div>
+      <div class="classic-item"><span class="classic-name">Black Russian</span><span class="classic-price">235k</span></div>
+      <div class="classic-item"><span class="classic-name">White Russian</span><span class="classic-price">235k</span></div>
+      <div class="classic-item"><span class="classic-name">Margarita</span><span class="classic-price">240k</span></div>
     </div>
   </div>
   <div class="page-number">4 / 7</div>
@@ -543,31 +564,31 @@ body {
     <span class="spirit-header-cell">bottle <span class="spirit-note">(for 5 pax)</span></span>
   </div>
   <div>
-    <div class="spirit-item"><span class="spirit-name">Captain Morgan Gold</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">1.45m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Rum Bacardi</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">1.45m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Rum Captain Morgan</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">1.45m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Smirnoff</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">1.45m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Absolut</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">1.45m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Beefeater</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">1.45m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Bombay Sapphire</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">1.65m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Hendrick's Gin</span><span class="spirit-cell">180k</span><span class="spirit-cell">275k</span><span class="spirit-cell">2.55m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Tequila Jose Cuervo</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">1.65m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Jimbeam</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">1.2m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Bulleit Bourbon</span><span class="spirit-cell">180k</span><span class="spirit-cell">275k</span><span class="spirit-cell">2.0m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Johnnie Walker Black</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell">2.0m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Johnnie Walker Double Black</span><span class="spirit-cell">180k</span><span class="spirit-cell">275k</span><span class="spirit-cell">2.55m</span></div>
-    <div class="spirit-item"><span class="spirit-name">Cointreau</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell dim">—</span></div>
-    <div class="spirit-item"><span class="spirit-name">Amaretto</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell dim">—</span></div>
-    <div class="spirit-item"><span class="spirit-name">Blue Curacao</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell dim">—</span></div>
-    <div class="spirit-item"><span class="spirit-name">Campari</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell dim">—</span></div>
-    <div class="spirit-item"><span class="spirit-name">Kahlua</span><span class="spirit-cell">165k</span><span class="spirit-cell">225k</span><span class="spirit-cell dim">—</span></div>
+    <div class="spirit-item"><span class="spirit-name">Captain Morgan Gold</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Rum Bacardi</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Rum Captain Morgan</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Smirnoff</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Absolut</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Beefeater</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.6m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Bombay Sapphire</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.8m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Hendrick's Gin</span><span class="spirit-cell">200k</span><span class="spirit-cell">300k</span><span class="spirit-cell">2.8m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Tequila Jose Cuervo</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.8m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Jimbeam</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">1.3m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Bulleit Bourbon</span><span class="spirit-cell">200k</span><span class="spirit-cell">300k</span><span class="spirit-cell">2.2m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Johnnie Walker Black</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell">2.2m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Johnnie Walker Double Black</span><span class="spirit-cell">200k</span><span class="spirit-cell">300k</span><span class="spirit-cell">2.8m</span></div>
+    <div class="spirit-item"><span class="spirit-name">Cointreau</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
+    <div class="spirit-item"><span class="spirit-name">Amaretto</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
+    <div class="spirit-item"><span class="spirit-name">Blue Curacao</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
+    <div class="spirit-item"><span class="spirit-name">Campari</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
+    <div class="spirit-item"><span class="spirit-name">Kahlua</span><span class="spirit-cell">180k</span><span class="spirit-cell">250k</span><span class="spirit-cell dim">—</span></div>
   </div>
   <div class="sec-head mt16">
     <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">BEER</span><span class="sec-title-diamond">◆</span></div>
   </div>
   <div class="two-col">
-    <div><div class="classic-item"><span class="classic-name">Corona</span><span class="classic-price">175k</span></div></div>
-    <div><div class="classic-item"><span class="classic-name">Budweiser</span><span class="classic-price">175k</span></div></div>
+    <div><div class="classic-item"><span class="classic-name">Corona</span><span class="classic-price">190k</span></div></div>
+    <div><div class="classic-item"><span class="classic-name">Budweiser</span><span class="classic-price">190k</span></div></div>
   </div>
   <div class="page-number">5 / 7</div>
 </div>
@@ -581,6 +602,7 @@ body {
     <div class="title-small">CALLA LILY</div>
   </div>
   
+  <!-- NHÓM SOFT DRINK (có chú thích From round 2) -->
   <div class="section-group">
     <div class="sec-head">
       <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">SOFT DRINK</span><span class="sec-title-diamond">◆</span></div>
@@ -588,12 +610,12 @@ body {
     <div class="softdrink-note" style="text-align: center; margin-top: 4px; margin-bottom: 12px;"> From round 2 </div>
     <div class="two-col">
       <div>
-        <div class="classic-item"><span class="classic-name">Aquafina</span><span class="classic-price">45k</span></div>
-        <div class="classic-item"><span class="classic-name">Coca Cola</span><span class="classic-price">45k</span></div>
-        <div class="classic-item"><span class="classic-name">7UP</span><span class="classic-price">45k</span></div>
+        <div class="classic-item"><span class="classic-name">Aquafina</span><span class="classic-price">50k</span></div>
+        <div class="classic-item"><span class="classic-name">Coca Cola</span><span class="classic-price">50k</span></div>
+        <div class="classic-item"><span class="classic-name">7UP</span><span class="classic-price">50k</span></div>
       </div>
       <div>
-        <div class="classic-item"><span class="classic-name">Schweppes</span><span class="classic-price">45k</span></div>
+        <div class="classic-item"><span class="classic-name">Schweppes</span><span class="classic-price">50k</span></div>
         <div class="classic-item">
           <span class="classic-name">Add-on mixer <span style="display:block;font-size:11px;color:#8a6a40;font-weight:500;">tonic / coke / redbull / soda</span></span>
           <span class="classic-price">30k</span>
@@ -602,37 +624,39 @@ body {
     </div>
   </div>
 
+  <!-- NHÓM WINE -->
   <div class="section-group">
     <div class="sec-head">
       <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">WINE</span><span class="sec-note">(bottle for 5 pax)</span><span class="sec-title-diamond">◆</span></div>
     </div>
     <div class="two-col">
       <div>
-        <div class="classic-item"><span class="classic-name">IL Pumo Negroamaro</span><span class="classic-price">180k <span class="price-note">(glass)</span> / 1.25m</span></div>
-        <div class="classic-item"><span class="classic-name">Marquis de Beylot</span><span class="classic-price">1.25m</span></div>
-        <div class="classic-item"><span class="classic-name">Château La Diligente</span><span class="classic-price">1.55m</span></div>
-        <div class="classic-item"><span class="classic-name">Crocus L'Atelier</span><span class="classic-price">1.8m</span></div>
-        <div class="classic-item"><span class="classic-name">F Negroamaro</span><span class="classic-price">2.75m</span></div>
+        <div class="classic-item"><span class="classic-name">IL Pumo Negroamaro</span><span class="classic-price">200k <span class="price-note">(glass)</span> / 1.4m</span></div>
+        <div class="classic-item"><span class="classic-name">Marquis de Beylot</span><span class="classic-price">1.4m</span></div>
+        <div class="classic-item"><span class="classic-name">Château La Diligente</span><span class="classic-price">1.7m</span></div>
+        <div class="classic-item"><span class="classic-name">Crocus L'Atelier</span><span class="classic-price">2.0m</span></div>
+        <div class="classic-item"><span class="classic-name">F Negroamaro</span><span class="classic-price">3.0m</span></div>
       </div>
       <div>
-        <div class="classic-item"><span class="classic-name">Cielo Sauvignon Blanc</span><span class="classic-price">180k <span class="price-note">(glass)</span> / 1.25m</span></div>
-        <div class="classic-item"><span class="classic-name">Deinhard Riesling</span><span class="classic-price">1.25m</span></div>
-        <div class="classic-item"><span class="classic-name">Talò Chardonnay</span><span class="classic-price">1.55m</span></div>
-        <div class="classic-item"><span class="classic-name">CF Collefrisio Cerasuolo</span><span class="classic-price">1.55m</span></div>
-        <div class="classic-item"><span class="classic-name">Tavernello Lambrusco</span><span class="classic-price">1.35m</span></div>
-        <div class="classic-item"><span class="classic-name">Tini Prosecco</span><span class="classic-price">1.35m</span></div>
+        <div class="classic-item"><span class="classic-name">Cielo Sauvignon Blanc</span><span class="classic-price">200k <span class="price-note">(glass)</span> / 1.4m</span></div>
+        <div class="classic-item"><span class="classic-name">Deinhard Riesling</span><span class="classic-price">1.4m</span></div>
+        <div class="classic-item"><span class="classic-name">Talò Chardonnay</span><span class="classic-price">1.7m</span></div>
+        <div class="classic-item"><span class="classic-name">CF Collefrisio Cerasuolo</span><span class="classic-price">1.7m</span></div>
+        <div class="classic-item"><span class="classic-name">Tavernello Lambrusco</span><span class="classic-price">1.5m</span></div>
+        <div class="classic-item"><span class="classic-name">Tini Prosecco</span><span class="classic-price">1.5m</span></div>
       </div>
     </div>
   </div>
 
+  <!-- NHÓM HOT DRINK -->
   <div class="section-group">
     <div class="sec-head">
       <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">HOT DRINK</span><span class="sec-title-diamond">◆</span></div>
     </div>
     <div class="two-col">
-      <div><div class="classic-item"><span class="classic-name">Hot Chocolate</span><span class="classic-price">180k</span></div></div>
-      <div><div class="classic-item"><span class="classic-name">Artichoke Tea</span><span class="classic-price">180k</span></div></div>
-      <div><div class="classic-item"><span class="classic-name">Lemon &amp; Ginger Tea</span><span class="classic-price">180k</span></div></div>
+      <div><div class="classic-item"><span class="classic-name">Hot Chocolate</span><span class="classic-price">200k</span></div></div>
+      <div><div class="classic-item"><span class="classic-name">Artichoke Tea</span><span class="classic-price">200k</span></div></div>
+      <div><div class="classic-item"><span class="classic-name">Lemon &amp; Ginger Tea</span><span class="classic-price">200k</span></div></div>
     </div>
   </div>
 
@@ -640,7 +664,7 @@ body {
   <div class="page-number">6 / 7</div>
 </div>
 
-<!-- TRANG 7 · SNACK + COMBO + FOOTER -->
+<!-- TRANG 7 · SNACK + COMBO + FOOTER (TÁCH BIỆT RÕ) -->
 <div class="page">
   <div class="page-border"></div>
   <div class="page-border-inner"></div>
@@ -649,6 +673,7 @@ body {
     <div class="title-small">CALLA LILY</div>
   </div>
 
+  <!-- NHÓM SNACK -->
   <div class="section-group">
     <div class="sec-head">
       <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">SNACK</span><span class="sec-title-diamond">◆</span></div>
@@ -660,14 +685,14 @@ body {
             Phô mai sợi hun khói
             <small class="snack-name-en" style="font-size: 14px;">Smoked Cheese String</small>
           </div>
-          <div class="snack-price">65k</div>
+          <div class="snack-price">69k</div>
         </div>
         <div class="snack-item">
           <div class="snack-name">
             Khoai tây sấy hành
             <small class="snack-name-en" style="font-size: 14px;">Onion Crispy Potato</small>
           </div>
-          <div class="snack-price">55k</div>
+          <div class="snack-price">59k</div>
         </div>
       </div>
       <div>
@@ -676,12 +701,13 @@ body {
             Da heo cháy tỏi
             <small class="snack-name-en" style="font-size: 14px;">Garlic Crispy Pork Skin</small>
           </div>
-          <div class="snack-price">65k</div>
+          <div class="snack-price">69k</div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- NHÓM COMBO (chữ to hơn) -->
   <div class="section-group">
     <div class="sec-head">
       <div class="sec-title-wrap"><span class="sec-title-diamond">◆</span><span class="sec-title">COMBO</span><span class="sec-title-diamond">◆</span></div>
@@ -692,29 +718,30 @@ body {
           <small style="display: block; font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: #7a5a38; font-style: italic; margin-top: 10px; line-height: 1.4;">1 Cocktail + 1 Snack bất kì</small>
           <small style="display: block; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: #a07840; font-style: italic; margin-top: 5px;">1 Cocktail + Any 1 Snack</small>
         </div>
-        <div class="combo-price">270k</div>
+        <div class="combo-price">299k</div>
       </div>
       <div class="combo-card">
         <div class="combo-name">SIGNATURE EXPERIENCE
           <small style="display: block; font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: #7a5a38; font-style: italic; margin-top: 10px; line-height: 1.4;">1 Signature + 1 Snack bất kì</small>
           <small style="display: block; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: #a07840; font-style: italic; margin-top: 5px;">1 Signature + Any 1 Snack</small>
         </div>
-        <div class="combo-price">290k</div>
+        <div class="combo-price">319k</div>
       </div>
       <div class="combo-card">
         <div class="combo-name">DATE NIGHT
           <small style="display: block; font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: #7a5a38; font-style: italic; margin-top: 10px; line-height: 1.4;">2 đồ uống bất kì + Refill Snack miễn phí</small>
           <small style="display: block; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: #a07840; font-style: italic; margin-top: 5px;">Any 2 drinks + Free Snack Refill</small>
         </div>
-        <div class="combo-price">545k</div>
+        <div class="combo-price">599k</div>
       </div>
     </div>
   </div>
 
+  <!-- Câu ghi chú - phông to hơn, căn giữa (inline style) -->
   <div class="note-section" style="margin: 20px 0 16px; padding: 18px 20px; background: linear-gradient(135deg, #fef9ef, #fdf5e8); border-radius: 12px; border-left: 4px solid #c9a96e; border-right: 1px solid rgba(201, 169, 110, 0.3);">
     <div class="note-item" style="text-align: center;">
-      <div class="note-text-vi" style="font-size: 18px; font-weight: 700; color: #2c1a10; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.5px; margin-bottom: 6px;">Bắt đầu từ vòng 2, các món trong menu đồng giá 145k (trừ chai rượu)</div>
-      <div class="note-text-en" style="font-size: 14px; font-weight: 500; color: #a07840; font-style: italic; font-family: 'Montserrat', sans-serif; letter-spacing: 0.3px;">From the 2nd round, all drinks are priced at 145k (excluding wine bottles)</div>
+      <div class="note-text-vi" style="font-size: 18px; font-weight: 700; color: #2c1a10; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.5px; margin-bottom: 6px;">Bắt đầu từ vòng 2, các món trong menu đồng giá 160k (trừ chai rượu)</div>
+      <div class="note-text-en" style="font-size: 14px; font-weight: 500; color: #a07840; font-style: italic; font-family: 'Montserrat', sans-serif; letter-spacing: 0.3px;">From the 2nd round, all drinks are priced at 160k (excluding wine bottles)</div>
     </div>
   </div>
 
