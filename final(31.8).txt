@@ -10,6 +10,7 @@
 /* ─────────────────────────────────────────────
    RESET & BASE
 ───────────────────────────────────────────── */
+@page { size: A4 portrait; margin: 0; }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
@@ -26,8 +27,6 @@
   --line:      rgba(201,169,110,0.28);
 }
 
-html { scroll-behavior: smooth; }
-
 body {
   background: #b8ae9e;
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -39,25 +38,24 @@ body {
 }
 
 /* ─────────────────────────────────────────────
-   PAGE SHELL — now a fluid responsive card,
-   not a fixed A4 sheet
+   PAGE SHELL  (A4 = 210 × 297 mm)
+   Inner live area: 210 - 2×18mm gutter = 174mm
+   But we set padding 22mm H / 18mm V inside
 ───────────────────────────────────────────── */
 .page {
-  width: 100%;
-  max-width: 720px;
+  width: 210mm;
+  min-height: 297mm;
+  max-height: 297mm;          /* force single-page sizing when previewing */
   background: var(--cream);
   margin: 14px auto;
-  padding: 30px 22px;
+  padding: 22mm 18mm 18mm;    /* top / sides / bottom – leave room for footer */
   position: relative;
   box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+  page-break-after: always;
+  break-inside: avoid;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 4px;
-}
-
-@media (min-width: 640px) {
-  .page { padding: 40px 44px; border-radius: 6px; }
 }
 
 /* ── Double frame ── */
@@ -79,8 +77,20 @@ body {
 }
 .page > * { position: relative; z-index: 1; }
 
-/* Page number removed on web — was print-only pagination */
-.pn { display: none; }
+/* ── Page number ── */
+.pn {
+  position: absolute;
+  bottom: 13px;
+  right: 22px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--gold-dark);
+  background: var(--cream);
+  padding: 2px 8px;
+  z-index: 2;
+}
 
 /* ─────────────────────────────────────────────
    RUNNING HEADER (all pages except cover)
@@ -137,19 +147,16 @@ body {
 }
 .sh-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  letter-spacing: 4px;
+  font-size: 15px;
+  letter-spacing: 5px;
   color: var(--gold-deep);
   font-weight: 800;
   white-space: nowrap;
 }
-@media (min-width: 640px) {
-  .sh-title { font-size: 15px; letter-spacing: 5px; }
-}
 .sh-diamond { color: var(--gold); font-size: 10px; }
 
 /* ─────────────────────────────────────────────
-   ░░  COVER  ░░
+   ░░  PAGE 1 · COVER  ░░
 ───────────────────────────────────────────── */
 .cover {
   flex: 1;
@@ -159,31 +166,25 @@ body {
   justify-content: center;
   text-align: center;
   gap: 0;
-  min-height: 60vh;
 }
-.cv-logo img { width: 110px; }
-@media (min-width: 640px) { .cv-logo img { width: 148px; } }
+.cv-logo img { width: 148px; }
 .cv-rule { width: 0.75px; height: 28px; background: linear-gradient(to bottom,var(--gold),transparent); margin: 22px auto; }
 .cv-name {
   font-family: 'Cinzel', serif;
-  font-size: 30px;
+  font-size: 42px;
   font-weight: 900;
-  letter-spacing: 8px;
+  letter-spacing: 13px;
   color: var(--ink);
   line-height: 1;
 }
-@media (min-width: 640px) {
-  .cv-name { font-size: 42px; letter-spacing: 13px; }
-}
 .cv-sub {
   font-family: 'Cinzel', serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 7px;
+  letter-spacing: 9px;
   color: var(--gold-dark);
   margin-top: 9px;
 }
-@media (min-width: 640px) { .cv-sub { font-size: 13px; letter-spacing: 9px; } }
 .cv-deco {
   display: flex;
   align-items: center;
@@ -200,65 +201,47 @@ body {
 .cv-deco span { color: var(--gold); font-size: 17px; }
 .cv-tag {
   font-style: italic;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 400;
   color: var(--ink-mute);
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
 }
-@media (min-width: 640px) { .cv-tag { font-size: 17px; letter-spacing: 2px; } }
 
 /* ─────────────────────────────────────────────
    ░░  SIGNATURE ROW  ░░
-   Stacks vertically on mobile, side-by-side on desktop
 ───────────────────────────────────────────── */
 .sig-rows { display: flex; flex-direction: column; }
 .sig-row {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: 22px;
   align-items: flex-start;
-  padding: 14px 0;
+  padding: 13px 0;
   border-bottom: 0.5px solid var(--line);
 }
-@media (min-width: 560px) {
-  .sig-row {
-    flex-direction: row;
-    gap: 22px;
-    align-items: flex-start;
-    padding: 13px 0;
-  }
-  .sig-row.rev { flex-direction: row-reverse; }
-}
 .sig-row:last-child { border-bottom: none; }
+.sig-row.rev { flex-direction: row-reverse; }
 
-.sig-img { flex-shrink: 0; width: 100%; }
+.sig-img { flex-shrink: 0; }
 .sig-img img {
   display: block;
-  width: 100%;
-  max-width: 220px;
+  width: 152px;
   height: auto;
-  margin: 0 auto;
   border: 1.5px solid var(--gold);
   border-radius: 7px;
   box-shadow: 2px 5px 14px rgba(0,0,0,0.07);
 }
-@media (min-width: 560px) {
-  .sig-img { width: auto; }
-  .sig-img img { width: 152px; margin: 0; }
-}
-.sig-body { flex: 1; width: 100%; }
+.sig-body { flex: 1; }
 .sig-name {
   font-family: 'Cinzel', serif;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--ink);
   letter-spacing: 0.5px;
   margin-bottom: 4px;
 }
-@media (min-width: 640px) { .sig-name { font-size: 24px; } }
 .sig-recipe {
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 500;
   font-style: italic;
   color: var(--gold-dark);
@@ -268,42 +251,36 @@ body {
 .sig-recipe .en { display: block; }
 .sig-recipe .vi { display: block; font-style: normal; color: var(--ink-mute); }
 .sig-vi {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--ink-mid);
   line-height: 1.5;
   display: block;
   margin-bottom: 4px;
 }
-@media (min-width: 640px) { .sig-vi { font-size: 17px; } }
 .sig-en {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   font-style: italic;
   color: var(--ink-mute);
   line-height: 1.45;
   display: block;
 }
-@media (min-width: 640px) { .sig-en { font-size: 15px; } }
 .sig-price {
   font-family: 'Cinzel', serif;
-  font-size: 23px;
+  font-size: 25px;
   font-weight: 800;
   color: var(--gold-deep);
   margin-top: 9px;
 }
-@media (min-width: 640px) { .sig-price { font-size: 25px; } }
 
 /* ─────────────────────────────────────────────
    ░░  SNACK  ░░
 ───────────────────────────────────────────── */
 .snack-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-@media (min-width: 560px) {
-  .snack-grid { grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
 }
 .snack-row {
   display: flex;
@@ -313,11 +290,10 @@ body {
   border-bottom: 0.5px solid var(--line);
 }
 .snack-row:last-child { border-bottom: none; }
-.snack-label { font-size: 18px; font-weight: 700; color: var(--ink-mid); }
-@media (min-width: 640px) { .snack-label { font-size: 19px; } }
+.snack-label { font-size: 19px; font-weight: 700; color: var(--ink-mid); }
 .snack-sub {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 400;
   font-style: italic;
   color: var(--ink-mute);
@@ -325,35 +301,27 @@ body {
 }
 .snack-p {
   font-family: 'Cinzel', serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   color: var(--gold-deep);
   white-space: nowrap;
   margin-left: 10px;
 }
-@media (min-width: 640px) { .snack-p { font-size: 22px; } }
 
 /* ─────────────────────────────────────────────
-   ░░  MOCKTAIL  ░░
+   ░░  MOCKTAIL (full-page, centred)  ░░
 ───────────────────────────────────────────── */
 .mock-rows { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0; }
 
 /* ─────────────────────────────────────────────
-   ░░  CLASSIC LIST  ░░
-   3 columns on desktop, 1 on mobile
+   ░░  CLASSIC LIST (3-col)  ░░
 ───────────────────────────────────────────── */
-.cl3 { display: grid; grid-template-columns: 1fr; gap: 0; }
-@media (min-width: 560px) {
-  .cl3 { grid-template-columns: repeat(2,1fr); gap: 0 14px; }
-}
-@media (min-width: 760px) {
-  .cl3 { grid-template-columns: repeat(3,1fr); }
-}
+.cl3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 0 14px; }
 .cl3-item {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 6px 0;
+  padding: 5.5px 0;
   border-bottom: 0.5px solid var(--line);
 }
 .cl3-item:last-child { border-bottom: none; }
@@ -380,48 +348,39 @@ body {
 ───────────────────────────────────────────── */
 .sp-head {
   display: grid;
-  grid-template-columns: 1fr 50px 60px;
+  grid-template-columns: 1fr 58px 68px;
   padding-bottom: 5px;
   border-bottom: 1.5px solid var(--gold);
   margin-bottom: 2px;
 }
-@media (min-width: 480px) {
-  .sp-head { grid-template-columns: 1fr 58px 68px; }
-}
 .sp-head span {
   font-family: 'Montserrat', sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   color: var(--gold-dark);
   text-align: right;
   text-transform: uppercase;
   line-height: 1.4;
 }
-@media (min-width: 480px) { .sp-head span { font-size: 10px; letter-spacing: 1px; } }
 .sp-head span:first-child { text-align: left; }
 
 .sp-row {
   display: grid;
-  grid-template-columns: 1fr 50px 60px;
+  grid-template-columns: 1fr 58px 68px;
   align-items: center;
   padding: 5px 0;
   border-bottom: 0.3px solid rgba(201,169,110,0.18);
 }
-@media (min-width: 480px) {
-  .sp-row { grid-template-columns: 1fr 58px 68px; }
-}
 .sp-row:last-child { border-bottom: none; }
-.sp-name { font-size: 14px; font-weight: 600; color: var(--ink-mid); }
-@media (min-width: 480px) { .sp-name { font-size: 15px; } }
+.sp-name { font-size: 15px; font-weight: 600; color: var(--ink-mid); }
 .sp-cell {
   font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--gold-deep);
   text-align: right;
 }
-@media (min-width: 480px) { .sp-cell { font-size: 14px; } }
 .sp-cell.dim { color: #c0a878; font-style: italic; font-weight: 400; }
 
 /* ─────────────────────────────────────────────
@@ -429,10 +388,10 @@ body {
 ───────────────────────────────────────────── */
 .lp { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 0; }
 
-.g2 { display: grid; grid-template-columns: 1fr; gap: 0; }
-@media (min-width: 560px) { .g2 { grid-template-columns: 1fr 1fr; gap: 0 24px; } }
-.g3 { display: grid; grid-template-columns: 1fr; gap: 0; }
-@media (min-width: 560px) { .g3 { grid-template-columns: 1fr 1fr 1fr; gap: 0 16px; } }
+/* 2-col generic */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+/* 3-col generic */
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 16px; }
 
 .lrow {
   display: flex;
@@ -442,16 +401,15 @@ body {
   border-bottom: 0.5px solid var(--line);
 }
 .lrow:last-child { border-bottom: none; }
-.lrow-name { font-size: 18px; font-weight: 600; color: var(--ink-mid); }
-@media (min-width: 640px) { .lrow-name { font-size: 19px; } }
+.lrow-name { font-size: 19px; font-weight: 600; color: var(--ink-mid); }
 .lrow-price {
   font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--gold-deep);
 }
-@media (min-width: 640px) { .lrow-price { font-size: 17px; } }
 
+/* addon */
 .addon {
   display: flex;
   justify-content: space-between;
@@ -461,15 +419,13 @@ body {
   border-radius: 6px;
   border: 0.5px solid var(--line);
   margin: 2px 0;
-  gap: 10px;
 }
-.addon-label { font-size: 15px; font-weight: 600; color: var(--ink-mid); font-style: italic; }
-@media (min-width: 640px) { .addon-label { font-size: 16px; } }
-.addon-label small { font-size: 11.5px; color: var(--ink-mute); font-weight: 400; font-style: normal; display: block; margin-top: 1px; }
-.addon-price { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: var(--gold-deep); white-space: nowrap; }
+.addon-label { font-size: 16px; font-weight: 600; color: var(--ink-mid); font-style: italic; }
+.addon-label small { font-size: 12px; color: var(--ink-mute); font-weight: 400; font-style: normal; display: block; margin-top: 1px; }
+.addon-price { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: var(--gold-deep); }
 
-.cg { display: grid; grid-template-columns: 1fr; gap: 12px; }
-@media (min-width: 480px) { .cg { grid-template-columns: repeat(2,1fr); } }
+/* combo */
+.cg { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
 .cc {
   background: linear-gradient(150deg, #fffef9, var(--cream-warm));
   border: 1.5px solid #d4b878;
@@ -515,17 +471,17 @@ body {
 }
 .cc-price {
   font-family: 'Cinzel', serif;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   color: var(--gold-deep);
   margin-top: 9px;
   padding-top: 8px;
   border-top: 1.5px dashed rgba(201,169,110,0.5);
 }
-@media (min-width: 640px) { .cc-price { font-size: 26px; } }
 
+/* note box */
 .note {
-  padding: 12px 16px;
+  padding: 12px 18px;
   background: linear-gradient(135deg, #fef9ef, var(--cream-warm));
   border-radius: 9px;
   border-left: 3.5px solid var(--gold);
@@ -533,16 +489,15 @@ body {
 }
 .note-vi {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--ink-mid);
   letter-spacing: 0.3px;
   line-height: 1.4;
 }
-@media (min-width: 640px) { .note-vi { font-size: 16px; } }
 .note-en {
   font-family: 'Montserrat', sans-serif;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--gold-dark);
   font-style: italic;
@@ -550,13 +505,14 @@ body {
 }
 .note-vat {
   font-family: 'Montserrat', sans-serif;
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--ink-faint);
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   margin-top: 5px;
 }
 
+/* footer */
 .ft {
   text-align: center;
   flex-shrink: 0;
@@ -565,104 +521,59 @@ body {
 }
 .ft-music {
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 2.5px;
+  letter-spacing: 3.5px;
   color: var(--gold-dark);
   margin-bottom: 3px;
 }
-@media (min-width: 640px) { .ft-music { font-size: 12px; letter-spacing: 3.5px; } }
 .ft-addr {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
+  font-size: 15px;
   font-style: italic;
   color: var(--ink-faint);
-  letter-spacing: 0.5px;
-}
-@media (min-width: 640px) { .ft-addr { font-size: 15px; letter-spacing: 1px; } }
-
-/* ─────────────────────────────────────────────
-   NAV — quick jump between sections (web-only feature)
-───────────────────────────────────────────── */
-.menu-nav {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto 14px;
-  background: rgba(253,248,239,0.95);
-  backdrop-filter: blur(6px);
-  border-radius: 999px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  padding: 8px 16px;
-  display: flex;
-  justify-content: space-between; 
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.menu-nav::-webkit-scrollbar { display: none; }
-.menu-nav a {
-  flex-shrink: 0;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
   letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--gold-dark);
-  text-decoration: none;
-  padding: 7px 13px;
-  border-radius: 999px;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-.menu-nav a:hover, .menu-nav a:active {
-  background: var(--gold);
-  color: var(--cream);
 }
 
 /* ─────────────────────────────────────────────
-   FIX: scroll margin cho các section để tránh bị che bởi nav
+   PRINT
 ───────────────────────────────────────────── */
-#signature, #combo, #mocktail, #classic, #shot, #beer {
-  scroll-margin-top: 80px;
+@media print {
+  body { background: white; padding: 0; margin: 0; }
+  .page {
+    margin: 0 auto;
+    box-shadow: none;
+    page-break-after: always;
+    break-inside: avoid;
+    max-height: none;
+  }
+  .page::before, .page::after { display: block; }
 }
-
-/* Image loading: lazy + async so first paint is fast */
-img { max-width: 100%; }
 </style>
 </head>
 <body>
 
-<nav class="menu-nav" aria-label="Menu sections">
-  <a href="#signature">Signature</a>
-  <a href="#combo">Combo</a>
-  <a href="#mocktail">Mocktail</a>
-  <a href="#classic">Classic</a>
-  <a href="#shot">Shot</a>
-  <a href="#beer">Beer &amp; More</a>
-</nav>
-
 <!-- ══════════════════════════════════════════════
-     COVER
+     PAGE 1 · COVER
 ══════════════════════════════════════════════ -->
 <div class="page">
   <div class="cover">
-    <div class="cv-logo"><img src="logo.png" alt="Calla Lily" loading="eager"></div>
+    <div class="cv-logo"><img src="logo.png" alt="Calla Lily"></div>
     <div class="cv-rule"></div>
     <div class="cv-name">CALLA LILY</div>
     <div class="cv-sub">ACOUSTIC BAR</div>
     <div class="cv-deco"><span>✦</span></div>
     <div class="cv-tag">live &amp; wine &amp; every night</div>
   </div>
+  <div class="pn">1 / 6</div>
 </div>
 
 <!-- ══════════════════════════════════════════════
-     SIGNATURE  Mulled Wine · Blush of Lily · Feracity
+     PAGE 2 · SIGNATURE  Mulled Wine · Blush of Lily · Feracity
 ══════════════════════════════════════════════ -->
-<div class="page" id="signature">
+<div class="page">
   <div class="rh">
-    <img src="logo.png" class="rh-logo" alt="" loading="lazy">
+    <img src="logo.png" class="rh-logo" alt="">
     <div class="rh-name">CALLA LILY</div>
   </div>
 
@@ -671,7 +582,7 @@ img { max-width: 100%; }
   <div class="sig-rows" style="flex:1;">
     <!-- Mulled Wine -->
     <div class="sig-row">
-      <div class="sig-img"><img src="mulledwine.png" alt="Mulled Wine" loading="lazy"></div>
+      <div class="sig-img"><img src="mulledwine.png" alt="Mulled Wine"></div>
       <div class="sig-body">
         <div class="sig-name">Mulled Wine</div>
         <div class="sig-recipe">
@@ -685,7 +596,7 @@ img { max-width: 100%; }
     </div>
     <!-- Blush of Lily -->
     <div class="sig-row rev">
-      <div class="sig-img"><img src="blushoflily.png" alt="Blush of Lily" loading="lazy"></div>
+      <div class="sig-img"><img src="blushoflily.png" alt="Blush of Lily"></div>
       <div class="sig-body">
         <div class="sig-name">Blush of Lily</div>
         <div class="sig-recipe">
@@ -699,7 +610,7 @@ img { max-width: 100%; }
     </div>
     <!-- Feracity -->
     <div class="sig-row" style="border-bottom:none;">
-      <div class="sig-img"><img src="feracity.png" alt="Feracity" loading="lazy"></div>
+      <div class="sig-img"><img src="feracity.png" alt="Feracity"></div>
       <div class="sig-body">
         <div class="sig-name">Feracity</div>
         <div class="sig-recipe">
@@ -712,14 +623,16 @@ img { max-width: 100%; }
       </div>
     </div>
   </div>
+
+  <div class="pn">2 / 6</div>
 </div>
 
 <!-- ══════════════════════════════════════════════
-     SIGNATURE I Feel Good · Ruby Lily  +  COMBO
+     PAGE 3 · SIGNATURE I Feel Good · Ruby Lily  +  COMBO
 ══════════════════════════════════════════════ -->
 <div class="page">
   <div class="rh">
-    <img src="logo.png" class="rh-logo" alt="" loading="lazy">
+    <img src="logo.png" class="rh-logo" alt="">
     <div class="rh-name">CALLA LILY</div>
   </div>
 
@@ -728,7 +641,7 @@ img { max-width: 100%; }
   <div class="sig-rows">
     <!-- I Feel Good -->
     <div class="sig-row rev">
-      <div class="sig-img"><img src="ifeelgood.png" alt="I Feel Good" loading="lazy"></div>
+      <div class="sig-img"><img src="ifeelgood.png" alt="I Feel Good"></div>
       <div class="sig-body">
         <div class="sig-name">I Feel Good</div>
         <div class="sig-recipe">
@@ -742,7 +655,7 @@ img { max-width: 100%; }
     </div>
     <!-- Ruby Lily -->
     <div class="sig-row" style="border-bottom:none;">
-      <div class="sig-img"><img src="rubylily.png" alt="Ruby Lily" loading="lazy"></div>
+      <div class="sig-img"><img src="rubylily.png" alt="Ruby Lily"></div>
       <div class="sig-body">
         <div class="sig-name">Ruby Lily</div>
         <div class="sig-recipe">
@@ -756,8 +669,8 @@ img { max-width: 100%; }
     </div>
   </div>
 
-  <!-- COMBO -->
-  <div class="sh" style="margin-top:18px;" id="combo"><div class="sh-inner"><span class="sh-diamond">◆</span><span class="sh-title">COMBO</span><span class="sh-diamond">◆</span></div></div>
+  <!-- COMBO immediately below Signature -->
+  <div class="sh" style="margin-top:18px;"><div class="sh-inner"><span class="sh-diamond">◆</span><span class="sh-title">COMBO</span><span class="sh-diamond">◆</span></div></div>
 
   <div class="cg">
     <div class="cc">
@@ -771,14 +684,16 @@ img { max-width: 100%; }
       <div class="cc-price">680k</div>
     </div>
   </div>
+
+  <div class="pn">3 / 6</div>
 </div>
 
 <!-- ══════════════════════════════════════════════
-     MOCKTAIL
+     PAGE 4 · MOCKTAIL
 ══════════════════════════════════════════════ -->
-<div class="page" id="mocktail">
+<div class="page">
   <div class="rh">
-    <img src="logo.png" class="rh-logo" alt="" loading="lazy">
+    <img src="logo.png" class="rh-logo" alt="">
     <div class="rh-name">CALLA LILY</div>
   </div>
 
@@ -786,7 +701,7 @@ img { max-width: 100%; }
 
   <div class="mock-rows">
     <div class="sig-row">
-      <div class="sig-img"><img src="1.png" alt="Golden Valley" loading="lazy" style="max-width:165px;"></div>
+      <div class="sig-img"><img src="1.png" alt="Golden Valley" style="width:165px;"></div>
       <div class="sig-body">
         <div class="sig-name">Golden Valley</div>
         <div class="sig-recipe">
@@ -799,7 +714,7 @@ img { max-width: 100%; }
       </div>
     </div>
     <div class="sig-row rev">
-      <div class="sig-img"><img src="2.png" alt="Berry Paradise" loading="lazy" style="max-width:165px;"></div>
+      <div class="sig-img"><img src="2.png" alt="Berry Paradise" style="width:165px;"></div>
       <div class="sig-body">
         <div class="sig-name">Berry Paradise</div>
         <div class="sig-recipe">
@@ -812,7 +727,7 @@ img { max-width: 100%; }
       </div>
     </div>
     <div class="sig-row" style="border-bottom:none;">
-      <div class="sig-img"><img src="3.png" alt="Blue Mountain" loading="lazy" style="max-width:165px;"></div>
+      <div class="sig-img"><img src="3.png" alt="Blue Mountain" style="width:165px;"></div>
       <div class="sig-body">
         <div class="sig-name">Blue Mountain</div>
         <div class="sig-recipe">
@@ -825,17 +740,20 @@ img { max-width: 100%; }
       </div>
     </div>
   </div>
+
+  <div class="pn">4 / 6</div>
 </div>
 
 <!-- ══════════════════════════════════════════════
-     CLASSIC COCKTAIL  +  SHOT
+     PAGE 5 · CLASSIC COCKTAIL  +  SHOT & BOTTLE
 ══════════════════════════════════════════════ -->
-<div class="page" id="classic">
+<div class="page">
   <div class="rh">
-    <img src="logo.png" class="rh-logo" alt="" loading="lazy">
+    <img src="logo.png" class="rh-logo" alt="">
     <div class="rh-name">CALLA LILY</div>
   </div>
 
+  <!-- CLASSIC COCKTAIL -->
   <div class="sh" style="margin-top:0;"><div class="sh-inner"><span class="sh-diamond">◆</span><span class="sh-title">CLASSIC COCKTAIL</span><span class="sh-diamond">◆</span></div></div>
 
   <div class="cl3">
@@ -862,7 +780,8 @@ img { max-width: 100%; }
     </div>
   </div>
 
-  <div class="sh" style="margin-top:16px;" id="shot"><div class="sh-inner"><span class="sh-diamond">◆</span><span class="sh-title">SHOT</span><span class="sh-diamond">◆</span></div></div>
+  <!-- SHOT & BOTTLE -->
+  <div class="sh" style="margin-top:16px;"><div class="sh-inner"><span class="sh-diamond">◆</span><span class="sh-title">SHOT</span><span class="sh-diamond">◆</span></div></div>
 
   <div class="sp-head">
     <span>Spirit</span>
@@ -889,19 +808,22 @@ img { max-width: 100%; }
     <div class="sp-row"><span class="sp-name">Bulleit Bourbon</span><span class="sp-cell">250k</span><span class="sp-cell">320k</span></div>
     <div class="sp-row"><span class="sp-name">Johnnie Walker Double Black</span><span class="sp-cell">250k</span><span class="sp-cell">320k</span></div>
   </div>
+
+  <div class="pn">5 / 6</div>
 </div>
 
 <!-- ══════════════════════════════════════════════
-     BEER · HOT DRINK · SNACK · ADD-ON · NOTE · FOOTER
+     PAGE 6 · BEER · HOT DRINK · SNACK · ADD-ON · NOTE · FOOTER
 ══════════════════════════════════════════════ -->
-<div class="page" id="beer">
+<div class="page">
   <div class="rh">
-    <img src="logo.png" class="rh-logo" alt="" loading="lazy">
+    <img src="logo.png" class="rh-logo" alt="">
     <div class="rh-name">CALLA LILY</div>
   </div>
 
   <div class="lp">
 
+    <!-- BEER + HOT DRINK side by side -->
     <div class="g2" style="gap:0 32px;">
       <div>
         <div class="sh" style="margin:0 0 7px;"><div class="sh-inner"><span class="sh-diamond">◆</span><span class="sh-title" style="font-size:13px;">BEER</span><span class="sh-diamond">◆</span></div></div>
@@ -916,8 +838,9 @@ img { max-width: 100%; }
       </div>
     </div>
 
+    <!-- SNACK -->
     <div>
-      <div class="sh" style="margin:16px 0 8px;"><div class="sh-inner"><span class="sh-diamond">◆</span><span class="sh-title" style="font-size:13px;">SNACK</span><span class="sh-diamond">◆</span></div></div>
+      <div class="sh" style="margin:0 0 8px;"><div class="sh-inner"><span class="sh-diamond">◆</span><span class="sh-title" style="font-size:13px;">SNACK</span><span class="sh-diamond">◆</span></div></div>
       <div class="snack-grid">
         <div>
           <div class="snack-row">
@@ -942,27 +865,32 @@ img { max-width: 100%; }
       </div>
     </div>
 
-    <div class="addon" style="margin-top:16px;">
+    <!-- ADD-ON -->
+    <div class="addon">
       <div class="addon-label">Add-on mixer<small>tonic / coke / redbull / soda</small></div>
       <div class="addon-price">+ 30k</div>
     </div>
 
-    <div style="text-align:center;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:var(--gold-dark);letter-spacing:2px;padding:10px 0 6px;">
+    <div style="text-align:center;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:var(--gold-dark);letter-spacing:2px;padding:4px 0 6px;">
       ✦ &nbsp;Children under 8 years old — FREE&nbsp; ✦
     </div>
 
+    <!-- NOTE -->
     <div class="note">
       <div class="note-vi">✦ &nbsp;Bắt đầu từ vòng 2, các món trong menu đồng giá 180k (trừ chai rượu)&nbsp; ✦</div>
       <div class="note-en">From the 2nd round, all drinks are priced at 180k (excluding wine bottles)</div>
       <div class="note-vat">✦ &nbsp;Giá trên đã bao gồm VAT &nbsp;·&nbsp; All prices include VAT&nbsp; ✦</div>
     </div>
 
-    <div class="ft" style="margin-top:16px;">
+    <!-- FOOTER -->
+    <div class="ft">
       <div class="ft-music">✦ &nbsp;OPENING TIME &nbsp;·&nbsp; 18:30 – 00:00&nbsp; ✦</div>
       <div class="ft-addr">57 Hà Huy Tập &nbsp;·&nbsp; Phường Xuân Hương &nbsp;·&nbsp; Đà Lạt</div>
     </div>
 
   </div>
+
+  <div class="pn">6 / 6</div>
 </div>
 
 </body>
